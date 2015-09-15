@@ -1,28 +1,46 @@
 * {
   border: 0px blue dashed;
+
 }
 
 body {
-	font-family: "Poiret One", cursive;
+  background-color: #EEEEEE;
+  font-family: "Poiret One";
+  margin-top: 0%;
 }
 
-/* Layout */
+section {
+  background-color: #FFFFFF;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+section:nth-of-type(1) {
+  padding-top: 0.4%;
+}
+
+section:nth-of-type(3) {
+padding-bottom: 1.5%;
+}
 
 #computerWrapper {
-  width: 1190px;
+  width: 65%;
   margin: auto;
   display: table;
 }
 
 #discardWrapper {
   margin: auto;
-  width: 1190px;
-  text-align: center;
+  width: 65%;
   display: table;
 }
 
+#discardWrapper h1 {
+  text-align: center;
+}
+
 #playerWrapper {
-  width: 1190px;
+  width: 65%;
   margin: auto;
   display: table;
 }
@@ -30,22 +48,27 @@ body {
 /* Cards */
 
 .card {
-  width: 12%; /*150px*/
-	/*height: 225px;*/
-  margin: 10px 10px;
-  border-radius: 10px;
+  width: 12.8%;
+  margin: 0.74% 0.74%;
+  border-radius: 0.3em;
   text-align: center;
-	vertical-align: top;
   display: inline-block;
   color: #FFFFFF;
   position: relative;
 }
 
+#discardPile .card {
+  margin-left: 43.58%;
+}
+/*
+#discardWrapper h1 {
+  margin-left: 43.58%;
+}
+*/
 .card:before {
   content: "";
   display: block;
-  padding-top: 150%;
-  font-size: 100%;
+  padding-top: 148%;
 }
 
 .Blue {
@@ -69,24 +92,34 @@ body {
 .Wild {
 	background-color: #000000;
 }
-/*
+/
 #computerHand .card {
 	background-color: #000000;
 }
-*/
+
 /* Text */
 
 h1 {
-  font-size: 125%; /*20px*/
+  font-size: 50%;
   font-weight: normal;
-  margin: 50px 10px 0px 10px;
+  margin: 1% 0.8% 0.1% 0.8%;
+}
+
+#playerWrapper h1 {
+  float: left;
+  display: inline-block;
+}
+
+button {
+  float: right;
+  margin-top: 1%;
+  margin-right: 0.8%;
+
 }
 
 .cardText {
-  font-size: 245%; /*40px*/
-  /*margin-top: 27px;*/
   pointer-events: none;
-  position: absolute; /*relative*/
+  position: absolute;
   margin-top: 20%;
   top: 0;
   left: 0;
@@ -100,4 +133,8 @@ h1 {
 
 .hidden {
   display: none;
+}
+
+#playerHand {
+  clear: both;
 }

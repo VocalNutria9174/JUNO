@@ -8,6 +8,17 @@ replaced all jquery w/ vanilla javascript to handle interaction w/ the DOM
 */
 
 $(document).ready(function() {
+console.log(document);
+document.body.setScaledFont = function(f) {
+  var s = this.offsetWidth, fs = s * f;
+  this.style.fontSize = fs + '%';
+  return this;
+};
+
+document.body.setScaledFont(0.13);
+window.onresize = function() {
+    document.body.setScaledFont(0.13);
+};
 
 function makeCards() { // Initialize deck and create cards
   var deck = [];
