@@ -8,7 +8,7 @@ replaced all jquery w/ vanilla javascript to handle interaction w/ the DOM
 */
 
 $(document).ready(function() {
-console.log(document);
+//console.log(document);
 document.body.setScaledFont = function(f) {
   var s = this.offsetWidth, fs = s * f;
   this.style.fontSize = fs + '%';
@@ -59,8 +59,8 @@ function makeCards() { // Initialize deck and create cards
         while(x === 9 && y < 3) {
           makeDeck("Draw Two", color, "drawTwo" + color + number);
           makeDeck("Draw Two", color, "drawTwo" + color + (number += 1));
-          makeDeck("Reverse", color, "reverse" + color + (number += 1));
-          makeDeck("Reverse", color, "reverse" + color + (number += 1));
+          //makeDeck("Reverse", color, "reverse" + color + (number += 1));
+          //makeDeck("Reverse", color, "reverse" + color + (number += 1));
           makeDeck("Skip", color, "skip" + color + (number += 1));
           makeDeck("Skip", color, "skip" + color + (number += 1));
           number += 1;
@@ -126,8 +126,8 @@ function displayCards(cards) { // Display cards
       var cardTextDiv1 = document.createElement("div");
       document.getElementById(cards[i].id).appendChild(cardTextDiv1);
       cardTextDiv1.setAttribute("class", "cardText");
-      cardTextDiv1.innerHTML = cards[i].type;
-      //cardTextDiv1.innerHTML = "JUNO";
+      //cardTextDiv1.innerHTML = cards[i].type;
+      cardTextDiv1.innerHTML = "JUNO";
     }
     break;
   case playerHand:
@@ -170,8 +170,8 @@ function displayCards(cards) { // Display cards
     var cardTextDiv5 = document.createElement("div");
     document.getElementById(computerHand[computerHand.length - 1].id).appendChild(cardTextDiv5);
     cardTextDiv5.setAttribute("class", "cardText");
-    cardTextDiv5.innerHTML = computerHand[computerHand.length - 1].type;
-    //cardTextDiv5.innerHTML = "JUNO";
+    //cardTextDiv5.innerHTML = computerHand[computerHand.length - 1].type;
+    cardTextDiv5.innerHTML = "JUNO";
   }
 }
 
