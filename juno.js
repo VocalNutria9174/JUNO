@@ -8,7 +8,7 @@ replaced all jquery w/ vanilla javascript to handle interaction w/ the DOM
 */
 
 $(document).ready(function() {
-//console.log(document);
+
 document.body.setScaledFont = function(f) {
   var s = this.offsetWidth, fs = s * f;
   this.style.fontSize = fs + '%';
@@ -115,63 +115,50 @@ function makeDiscardPile(deck) { // Make discard pile
   return discardPile;
 }
 
-function displayCards(cards) { // Display cards
+function displayHand(cards, element) {
+  for(var i = 0; i < cards.length; i++) {
+    var cardDiv1 = document.createElement("div");
+    document.getElementById(element).appendChild(cardDiv1);
+    cardDiv1.setAttribute("class", "card " + cards[i].color);
+    cardDiv1.setAttribute("id", cards[i].id);
+    var cardTextDiv1 = document.createElement("div");
+    document.getElementById(cards[i].id).appendChild(cardTextDiv1);
+    cardTextDiv1.setAttribute("class", "cardText");
+    cardTextDiv1.innerHTML = cards[i].type;
+    //if(element === "computerHand") {
+    //  cardTextDiv1.innerHTML = "JUNO";
+    //}
+    //else {
+      cardTextDiv1.innerHTML = cards[i].type;
+    //}
+  }
+}
+
+function display(cards) { // Display cards
   switch(cards) {
   case computerHand:
-    for(var i = 0; i < cards.length; i++) {
-      var cardDiv1 = document.createElement("div");
-      document.getElementById("computerHand").appendChild(cardDiv1);
-      cardDiv1.setAttribute("class", "card " + cards[i].color);
-      cardDiv1.setAttribute("id", cards[i].id);
-      var cardTextDiv1 = document.createElement("div");
-      document.getElementById(cards[i].id).appendChild(cardTextDiv1);
-      cardTextDiv1.setAttribute("class", "cardText");
-      cardTextDiv1.innerHTML = cards[i].type;
-      //cardTextDiv1.innerHTML = "JUNO";
-    }
+    var element = "computerHand";
+    displayHand(cards, element);
     break;
   case playerHand:
-    for(var x = 0; x < cards.length; x++) {
-      var cardDiv2 = document.createElement("div");
-      document.getElementById("playerHand").appendChild(cardDiv2);
-      cardDiv2.setAttribute("class", "card " + cards[x].color);
-      cardDiv2.setAttribute("id", cards[x].id);
-      var cardTextDiv2 = document.createElement("div");
-      document.getElementById(cards[x].id).appendChild(cardTextDiv2);
-      cardTextDiv2.setAttribute("class", "cardText");
-      cardTextDiv2.innerHTML = cards[x].type;
-    }
+    element = "playerHand";
+    displayHand(cards, element);
     break;
   case discardPile:
-      var cardDiv3 = document.createElement("div");
-      document.getElementById("discardPile").appendChild(cardDiv3);
-      cardDiv3.setAttribute("class", "card " + cards[0].color);
-      cardDiv3.setAttribute("id", cards[0].id);
-      var cardTextDiv3 = document.createElement("div");
-      document.getElementById(cards[0].id).appendChild(cardTextDiv3);
-      cardTextDiv3.setAttribute("class", "cardText");
-      cardTextDiv3.innerHTML = cards[0].type;
+    element = "discardPile";
+    displayHand(cards, element);
     break;
   case playerHand[playerHand.length - 1]:
-      var cardDiv4 = document.createElement("div");
-      document.getElementById("playerHand").appendChild(cardDiv4);
-      cardDiv4.setAttribute("class", "card " + playerHand[playerHand.length - 1].color);
-      cardDiv4.setAttribute("id", playerHand[playerHand.length - 1].id);
-      var cardTextDiv4 = document.createElement("div");
-      document.getElementById(playerHand[playerHand.length - 1].id).appendChild(cardTextDiv4);
-      cardTextDiv4.setAttribute("class", "cardText");
-      cardTextDiv4.innerHTML = playerHand[playerHand.length - 1].type;
-      break;
-    case computerHand[computerHand.length - 1]:
-    var cardDiv5 = document.createElement("div");
-    document.getElementById("computerHand").appendChild(cardDiv5);
-    cardDiv5.setAttribute("class", "card " + computerHand[computerHand.length - 1].color);
-    cardDiv5.setAttribute("id", computerHand[computerHand.length - 1].id);
-    var cardTextDiv5 = document.createElement("div");
-    document.getElementById(computerHand[computerHand.length - 1].id).appendChild(cardTextDiv5);
-    cardTextDiv5.setAttribute("class", "cardText");
-    cardTextDiv5.innerHTML = computerHand[computerHand.length - 1].type;
-    //cardTextDiv5.innerHTML = "JUNO";
+    var newPlayerCard = [];
+    newPlayerCard.push(playerHand[playerHand.length - 1]);
+    element = "playerHand";
+    displayHand(newPlayerCard, element);
+    break;
+  case computerHand[computerHand.length - 1]:
+    var newComputerCard = [];
+    newComputerCard.push(computerHand[computerHand.length - 1]);
+    element = "computerHand";
+    displayHand(newComputerCard, element);
   }
 }
 
@@ -191,10 +178,12 @@ function playCard(card, discardPile, hand) {
   element.parentNode.removeChild(element);
   // Move clicked card to top of discard pile (array)
   discardPile.unshift(card);
+  // Remove previous card from discard pile (array)
+  discardPile.splice(1, 1);
   // Remove previous discard pile (DOM)
   document.querySelector("#discardPile").removeChild(document.querySelector("#discardPile").firstChild);
   // Add new discard pile (DOM)
-  displayCards(discardPile);
+  display(discardPile);
   // Remove clicked card from hand (array)
   for(var i = 0; i < hand.length; i++) {
     if(hand[i].id === card.id) {
@@ -237,7 +226,7 @@ function takeTurn(hand, discardPile, deck) {
       // Move card from front of deck to hand
       hand.push(deck[0]);
       deck.splice(0, 1);
-      displayCards(hand[hand.length - 1]);
+      display(playerHand[playerHand.length - 1]);
       playableCardH = canPlay(playerHand, discardPile);
       event.target.className = "disabled";
       document.getElementById("passButton").removeAttribute("class", "disabled");
@@ -252,40 +241,51 @@ function takeTurn(hand, discardPile, deck) {
 
 function computerTurn(hand, discardPile, deck) {
   var playableCardsPC = canPlay(computerHand, discardPile);
-  setTimeout(func, 1000);
+  setTimeout(funcx, 1000);
+  function funcx() {
+  if(discardPile[0].type === "Draw Two") {
+            hand.push(deck[0]);
+            deck.splice(0, 1);
+            //display(hand[hand.length - 1]);
+            hand.push(deck[0]);
+            deck.splice(0, 1);
+            display(hand);
+          }
+        }
+  setTimeout(func, 2000);
   function func() {
     if(playableCardsPC.length < 1) {
       hand.push(deck[0]);
       deck.splice(0, 1);
-      displayCards(hand[hand.length - 1]);
+      display(computerHand[computerHand.length - 1]);
     }
   }
-
-  function func3() {
-    document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
-    discardPile[0].color = colorsSorted[0];
-  }
-
-  setTimeout(func2, 1500);
+  setTimeout(func2, 3000);
   function func2() {
     playableCardsPC = canPlay(computerHand, discardPile);
     if(playableCardsPC.length > 0) {
       playCard(playableCardsPC[0], discardPile, hand);
       if(playableCardsPC[0].color === "Wild") {
-        handColors = {};
+        var handColors = {};
         hand.forEach(function(i) {
           handColors[i.color] = (handColors[i.color] || 0 ) + 1;
         });
-        handColorsA = [];
-        for(var x in handColors) {
-          handColorsA.push([x, handColors[x]]);
+        var handColorsA = [];
+        for(var j = 0; j < handColorsA.length; j++) {
+          handColorsA.push([j, handColors[j]]);
         }
+        var colorsSorted = [];
         colorsSorted = Object.keys(handColors).sort(function(x, y) {
           return handColors[x] - handColors[y];
         }).reverse();
-        setTimeout(func3, 5000);
+        setTimeout(func3, 4000);
       }
     }
+    function func3() {
+    document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
+    discardPile[0].color = colorsSorted[0];
+  }
+
     document.getElementById("playerWrapper").removeAttribute("class", "disabled");
     document.getElementById("drawButton").removeAttribute("class", "disabled");
   }
@@ -296,9 +296,9 @@ var computerHand = dealComputer(deck);
 var playerHand = dealPlayer(deck);
 var discardPile = makeDiscardPile(deck);
 deck.splice(0, 15);
-displayCards(computerHand);
-displayCards(discardPile);
-displayCards(playerHand);
+display(computerHand);
+display(discardPile);
+display(playerHand);
 takeTurn(playerHand, discardPile, deck);
 
 });
