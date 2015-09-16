@@ -126,8 +126,8 @@ function displayCards(cards) { // Display cards
       var cardTextDiv1 = document.createElement("div");
       document.getElementById(cards[i].id).appendChild(cardTextDiv1);
       cardTextDiv1.setAttribute("class", "cardText");
-      //cardTextDiv1.innerHTML = cards[i].type;
-      cardTextDiv1.innerHTML = "JUNO";
+      cardTextDiv1.innerHTML = cards[i].type;
+      //cardTextDiv1.innerHTML = "JUNO";
     }
     break;
   case playerHand:
@@ -170,8 +170,8 @@ function displayCards(cards) { // Display cards
     var cardTextDiv5 = document.createElement("div");
     document.getElementById(computerHand[computerHand.length - 1].id).appendChild(cardTextDiv5);
     cardTextDiv5.setAttribute("class", "cardText");
-    //cardTextDiv5.innerHTML = computerHand[computerHand.length - 1].type;
-    cardTextDiv5.innerHTML = "JUNO";
+    cardTextDiv5.innerHTML = computerHand[computerHand.length - 1].type;
+    //cardTextDiv5.innerHTML = "JUNO";
   }
 }
 
@@ -222,6 +222,7 @@ function takeTurn(hand, discardPile, deck) {
         if(playableCardH[i].id === clickCard) {
           document.getElementById("playerWrapper").setAttribute("class", "disabled");
           document.getElementById("drawButton").setAttribute("class", "disabled");
+          document.getElementById("passButton").setAttribute("class", "disabled");
           playCard(playableCardH[i], discardPile, hand);
           if(playableCardH[i].color === "Wild") {
             playWild();
@@ -259,11 +260,31 @@ function computerTurn(hand, discardPile, deck) {
       displayCards(hand[hand.length - 1]);
     }
   }
-  setTimeout(func2, 2000);
+
+  function func3() {
+    document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
+    discardPile[0].color = colorsSorted[0];
+  }
+
+  setTimeout(func2, 1500);
   function func2() {
     playableCardsPC = canPlay(computerHand, discardPile);
     if(playableCardsPC.length > 0) {
       playCard(playableCardsPC[0], discardPile, hand);
+      if(playableCardsPC[0].color === "Wild") {
+        handColors = {};
+        hand.forEach(function(i) {
+          handColors[i.color] = (handColors[i.color] || 0 ) + 1;
+        });
+        handColorsA = [];
+        for(var x in handColors) {
+          handColorsA.push([x, handColors[x]]);
+        }
+        colorsSorted = Object.keys(handColors).sort(function(x, y) {
+          return handColors[x] - handColors[y];
+        }).reverse();
+        setTimeout(func3, 5000);
+      }
     }
     document.getElementById("playerWrapper").removeAttribute("class", "disabled");
     document.getElementById("drawButton").removeAttribute("class", "disabled");
