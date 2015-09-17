@@ -160,7 +160,7 @@ function playCard(card, discardPile, hand) {
   }
 }
 
-function playWild(computerHand, discardPile, deck) {
+function playWild(computerHand, discardPile, deck, playerHand) {
   document.getElementById("wild").removeAttribute("class", "hidden");
   document.getElementById("wild").onclick = function(event) {
     document.getElementById("wild").setAttribute("class", "hidden");
@@ -182,7 +182,7 @@ function takeTurn(playerHand, discardPile, deck, computerHand) {
           document.getElementById("passButton").setAttribute("class", "disabled");
           playCard(playableCardH[i], discardPile, playerHand);
           if(playableCardH[i].color === "Wild") {
-            playWild(computerHand, discardPile, deck);
+            playWild(computerHand, discardPile, deck, playerHand);
           }
           else {
             computerTurn(computerHand, discardPile, deck, playerHand);
@@ -214,13 +214,18 @@ function takeTurn(playerHand, discardPile, deck, computerHand) {
 function playerStartTurn(playerHand, deck, discardPile) {
   document.getElementById("playerWrapper").removeAttribute("class", "disabled");
   document.getElementById("drawButton").removeAttribute("class", "disabled");
+  var elem = "playerHand";
+  var num = 2;
   if(discardPile[0].type === "Draw Two") {
-    var elem = "playerHand";
-    drawTwo(playerHand, deck, elem);
+    drawMore(playerHand, deck, elem, num);
+    }
+  if(discardPile[0].type === "Wild Draw Four") {
+    num = 4;
+    drawMore(playerHand, deck, elem, num);
     }
 }
 
-
+/*
 function drawTwo(hand, deck, elem) {
     hand.push(deck[0]);
     var newCard = [];
@@ -232,6 +237,16 @@ function drawTwo(hand, deck, elem) {
     displayHand(newCard, elem);
     deck.splice(0, 2);
   }
+*/
+function drawMore(hand, deck, elem, num) {
+  for(var i = 0; i < num; i++) {
+    hand.push(deck[i]);
+    var newCard = [];
+    newCard.push(hand[hand.length - 1]);
+    displayHand(newCard, elem);
+  }
+    deck.splice(0, num);
+  }
 
 function computerTurn(hand, discardPile, deck, playerHand) {
   //var g = 0;
@@ -240,18 +255,22 @@ function computerTurn(hand, discardPile, deck, playerHand) {
   if(discardPile[0].type === "Draw Two") {
     setTimeout(initDrawTwo, 1000);
   }
+  else if(discardPile[0].type === "Wild Draw Four") {
+    setTimeout(initDrawFour, 1000);
+  }
   else if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
   }
   else {
     setTimeout(computerPlayCard, 1000);
   }
-  
+
 
   function initDrawTwo() {
-    console.log("X: Draw Two on the discard pile");
+    console.log("X1: Draw Two on the discard pile");
     var elem = "computerHand";
-    drawTwo(hand, deck, elem);
+    var num = 2;
+    drawMore(hand, deck, elem, num);
     playableCardsPC = canPlay(hand, discardPile);
     if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -260,6 +279,27 @@ function computerTurn(hand, discardPile, deck, playerHand) {
       setTimeout(computerPlayCard, 1000);
     }
   }
+
+function initDrawFour() {
+    console.log("X2: Draw Four on the discard pile");
+    var elem = "computerHand";
+    var num = 4;
+    drawMore(hand, deck, elem, num);
+    playableCardsPC = canPlay(hand, discardPile);
+    if(playableCardsPC.length < 1) {
+    setTimeout(computerDrawCard, 1000);
+    }
+    else {
+      setTimeout(computerPlayCard, 1000);
+    }
+  }
+
+if(playableCardsPC[0].type === "Wild Draw Four") {
+      var elem = "computerHand";
+      var num = 2;
+      drawMore(hand, deck, elem, num);
+    }
+
   function computerDrawCard() {
       var a = Math.floor(Date.now() / 1000);
       console.log("A: no playable cards; draws a card " + a);
