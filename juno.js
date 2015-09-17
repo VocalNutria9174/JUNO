@@ -211,34 +211,25 @@ function takeTurn(playerHand, discardPile, deck, computerHand) {
   });
 }
 
-function playerStartTurn(playerHand, deck, discardPile) {
+function playerStartTurn(playerHand, deck, discardPile, computerHand) {
   document.getElementById("playerWrapper").removeAttribute("class", "disabled");
   document.getElementById("drawButton").removeAttribute("class", "disabled");
   var elem = "playerHand";
   var num = 2;
-  if(discardPile[0].type === "Draw Two") {
-    drawMore(playerHand, deck, elem, num);
+  if(discardPile[0].type === "Draw Two" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
+    drawMore(playerHand, deck, elem, num, discardPile);
     }
-  if(discardPile[0].type === "Wild Draw Four") {
+  else if(discardPile[0].type === "Wild Draw Four" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
     num = 4;
-    drawMore(playerHand, deck, elem, num);
+    drawMore(playerHand, deck, elem, num, discardPile);
+    }
+  else if(discardPile[0].type === "Skip" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
+    document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + discardPile[0].color + " disabled");
+    computerTurn(computerHand, discardPile, deck, playerHand);
     }
 }
 
-/*
-function drawTwo(hand, deck, elem) {
-    hand.push(deck[0]);
-    var newCard = [];
-    newCard.push(hand[hand.length - 1]);
-    displayHand(newCard, elem);
-    hand.push(deck[1]);
-    newCard = [];
-    newCard.push(hand[hand.length - 1]);
-    displayHand(newCard, elem);
-    deck.splice(0, 2);
-  }
-*/
-function drawMore(hand, deck, elem, num) {
+function drawMore(hand, deck, elem, num, discardPile) {
   for(var i = 0; i < num; i++) {
     hand.push(deck[i]);
     var newCard = [];
@@ -246,17 +237,22 @@ function drawMore(hand, deck, elem, num) {
     displayHand(newCard, elem);
   }
     deck.splice(0, num);
+    document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + discardPile[0].color + " disabled");
   }
 
 function computerTurn(hand, discardPile, deck, playerHand) {
   //var g = 0;
   var playableCardsPC = canPlay(hand, discardPile);
 
-  if(discardPile[0].type === "Draw Two") {
+  if(discardPile[0].type === "Draw Two" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
     setTimeout(initDrawTwo, 1000);
   }
-  else if(discardPile[0].type === "Wild Draw Four") {
+  else if(discardPile[0].type === "Wild Draw Four" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
     setTimeout(initDrawFour, 1000);
+  }
+  else if(discardPile[0].type === "Skip" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
+    document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + discardPile[0].color + " disabled");
+    playerStartTurn(playerHand, deck, discardPile, hand);
   }
   else if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -270,7 +266,7 @@ function computerTurn(hand, discardPile, deck, playerHand) {
     console.log("X1: Draw Two on the discard pile");
     var elem = "computerHand";
     var num = 2;
-    drawMore(hand, deck, elem, num);
+    drawMore(hand, deck, elem, num, discardPile);
     playableCardsPC = canPlay(hand, discardPile);
     if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -284,7 +280,7 @@ function initDrawFour() {
     console.log("X2: Draw Four on the discard pile");
     var elem = "computerHand";
     var num = 4;
-    drawMore(hand, deck, elem, num);
+    drawMore(hand, deck, elem, num, discardPile);
     playableCardsPC = canPlay(hand, discardPile);
     if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -293,12 +289,6 @@ function initDrawFour() {
       setTimeout(computerPlayCard, 1000);
     }
   }
-
-if(playableCardsPC[0].type === "Wild Draw Four") {
-      var elem = "computerHand";
-      var num = 2;
-      drawMore(hand, deck, elem, num);
-    }
 
   function computerDrawCard() {
       var a = Math.floor(Date.now() / 1000);
@@ -336,7 +326,7 @@ if(playableCardsPC[0].type === "Wild Draw Four") {
       else {
         //var d = Math.floor(Date.now() / 1000);
         //console.log("d: " + d);
-        playerStartTurn(playerHand, deck, discardPile);
+        playerStartTurn(playerHand, deck, discardPile, hand);
         var d2 = Math.floor(Date.now() / 1000);
         console.log("D2: turn ends - played a card (not wild) " + d2);
       }
@@ -344,7 +334,7 @@ if(playableCardsPC[0].type === "Wild Draw Four") {
     else {
         //var e = Math.floor(Date.now() / 1000);
         //console.log("e: " + e);
-        playerStartTurn(playerHand, deck, discardPile);
+        playerStartTurn(playerHand, deck, discardPile, hand);
         var d1 = Math.floor(Date.now() / 1000);
         console.log("D1: turn ends - drew a card but had nothing to play" + d1);
     }
@@ -353,7 +343,7 @@ if(playableCardsPC[0].type === "Wild Draw Four") {
     console.log("C: chooses color of wild card " + c);
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
     discardPile[0].color = colorsSorted[0];
-    playerStartTurn(playerHand, deck, discardPile);
+    playerStartTurn(playerHand, deck, discardPile, hand);
     var d3 = Math.floor(Date.now() / 1000);
     console.log("D3: turn ends - played a wild card " + d3);
   }
