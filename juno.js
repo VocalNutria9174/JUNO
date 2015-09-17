@@ -59,8 +59,6 @@ function makeCards() { // Initialize deck and create cards
         while(x === 9 && y < 3) {
           makeDeck("Draw Two", color, "drawTwo" + color + number);
           makeDeck("Draw Two", color, "drawTwo" + color + (number += 1));
-          //makeDeck("Reverse", color, "reverse" + color + (number += 1));
-          //makeDeck("Reverse", color, "reverse" + color + (number += 1));
           makeDeck("Skip", color, "skip" + color + (number += 1));
           makeDeck("Skip", color, "skip" + color + (number += 1));
           number += 1;
@@ -130,35 +128,6 @@ function displayHand(cards, elem) {
     //}
   }
 }
-/*
-function display(cards) { // Display cards
-  switch(cards) {
-  case computerHand:
-    console.log(computerHand);
-    var element = "computerHand";
-    displayHand(cards, element);
-    break;
-  case playerHand:
-    element = "playerHand";
-    displayHand(cards, element);
-    break;
-  case discardPile:
-    element = "discardPile";
-    displayHand(cards, element);
-    break;
-  case playerHand[playerHand.length - 1]:
-    var newPlayerCard = [];
-    newPlayerCard.push(playerHand[playerHand.length - 1]);
-    element = "playerHand";
-    displayHand(newPlayerCard, element);
-    break;
-  case computerHand[computerHand.length - 1]:
-    var newComputerCard = [];
-    newComputerCard.push(computerHand[computerHand.length - 1]);
-    element = "computerHand";
-    displayHand(newComputerCard, element);
-  }
-}*/
 
 function canPlay(hand, discardPile) { // Determine which cards the current player can play
   var playableCards = [];
@@ -203,7 +172,6 @@ function playWild(computerHand, discardPile, deck) {
 
 function takeTurn(hand, discardPile, deck, computerHand) {
   document.querySelector("body").addEventListener("click", function(event) {
-    //console.log(playerHand);
     var playableCardH = canPlay(hand, discardPile);
     if(event.target.parentNode.id === "playerHand" && document.getElementById("playerWrapper").className !== "disabled" && event.target.classList.contains("card")) {
       var clickCard = event.target.getAttribute("id");
@@ -244,6 +212,7 @@ function takeTurn(hand, discardPile, deck, computerHand) {
 }
 
 function computerTurn(hand, discardPile, deck) {
+  //var g = 0;
   var playableCardsPC = canPlay(hand, discardPile);
   /*setTimeout(funcx, 1000);
   function funcx() {
@@ -257,9 +226,11 @@ function computerTurn(hand, discardPile, deck) {
             displayHand(hand, elem);
           }
         }*/
-  setTimeout(func, 1200);
+  setTimeout(func, 1000);
   function func() {
     if(playableCardsPC.length < 1) {
+      var a = Math.floor(Date.now() / 1000);
+      console.log("A: no playable cards; draws a card " + a);
       hand.push(deck[0]);
       deck.splice(0, 1);
       var elem = "computerHand";
@@ -268,10 +239,14 @@ function computerTurn(hand, discardPile, deck) {
       displayHand(newComputerCard, elem);
     }
   }
-  setTimeout(func2, 2000);
+  //var n = new Date();
+   // console.log(n.getTime());
+  setTimeout(func2, 1500);
   function func2() {
     playableCardsPC = canPlay(hand, discardPile);
     if(playableCardsPC.length > 0) {
+      var b = Math.floor(Date.now() / 1000);
+      console.log("B: plays a card " + b);
       playCard(playableCardsPC[0], discardPile, hand);
       if(playableCardsPC[0].color === "Wild") {
         var handColors = {};
@@ -284,18 +259,36 @@ function computerTurn(hand, discardPile, deck) {
         }
         var colorsSorted = [];
         colorsSorted = Object.keys(handColors).sort(function(x, y) {
-          return handColors[x] - handColors[y];
-        }).reverse();
-        setTimeout(func3, 1000/*1000*/);
+          return handColors[x] - handColors[y]; }).reverse();
+        setTimeout(func3, 1000);
+      }
+      else {
+        //var d = Math.floor(Date.now() / 1000);
+        //console.log("d: " + d);
+        document.getElementById("playerWrapper").removeAttribute("class", "disabled");
+        document.getElementById("drawButton").removeAttribute("class", "disabled");
+        var d2 = Math.floor(Date.now() / 1000);
+        console.log("D2: turn ends - played a card (not wild) " + d2);
       }
     }
+    else {
+        //var e = Math.floor(Date.now() / 1000);
+        //console.log("e: " + e);
+        document.getElementById("playerWrapper").removeAttribute("class", "disabled");
+        document.getElementById("drawButton").removeAttribute("class", "disabled");
+        var d1 = Math.floor(Date.now() / 1000);
+        console.log("D1: turn ends - drew a card but had nothing to play" + d1);
+    }
     function func3() {
+    var c = Math.floor(Date.now() / 1000);
+    console.log("C: chooses color of wild card " + c);
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
     discardPile[0].color = colorsSorted[0];
-  }
-    console.log("ping");
     document.getElementById("playerWrapper").removeAttribute("class", "disabled");
     document.getElementById("drawButton").removeAttribute("class", "disabled");
+    var d3 = Math.floor(Date.now() / 1000);
+    console.log("D3: turn ends - played a wild card " + d3);
+  }
   }
 }
 
