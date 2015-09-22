@@ -1,5 +1,8 @@
 * {
   border: 0px blue dashed;
+  -webkit-user-select: none; /* Prevents highlighting on double-click */
+-moz-user-select: none; /* Prevents highlighting on double-click */
+-ms-user-select: none; /* Prevents highlighting on double-click */
 
 }
 
@@ -7,6 +10,7 @@ body {
   background-color: #EEEEEE;
   font-family: "Poiret One";
   margin-top: 0%;
+  overflow: auto; /* Prevents horizontal scrollbar from appearing */
 }
 
 section {
@@ -40,7 +44,7 @@ border-left: 1px solid #E0E0E0;
 }
 
 #computerHand {
-  white-space: nowrap;
+  white-space: nowrap; /* Prevents cards from breaking to new line */
 }
 
 #discardWrapper {
@@ -74,6 +78,12 @@ border-left: 1px solid #E0E0E0;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4);
   box-shadow: 0 1px 2px rgba(0,0,0,.4);
+  /*transition: bottom 0.25s, top 0.25s, left 0.25s, opacity 0.50s, -webkit-transform 0.25s;*/
+  -webkit-transition: -webkit-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
+}
+
+.animated {
+  opacity: .5;
 }
 
 #discardPile .card {
@@ -84,7 +94,7 @@ border-left: 1px solid #E0E0E0;
   margin-left: 43.58%;
 }
 */
-.card:before {
+.card:before { /* Sets card height relative to width */
   content: "";
   display: block;
   padding-top: 148%;
@@ -168,7 +178,7 @@ button {
 }
 
 .cardText {
-  pointer-events: none;
+  pointer-events: none; /* Prevents cursor from changing to caret over text */
   position: absolute;
   margin-top: 22%;
   top: 0;
@@ -187,7 +197,7 @@ button {
 
 #playerHand {
   clear: both;
-  white-space: nowrap;
+  white-space: nowrap; /* Prevents cards from breaking to new line */
 }
 
 #computerHand .card {
