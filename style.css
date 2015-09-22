@@ -73,19 +73,22 @@ border-left: 1px solid #E0E0E0;
   display: inline-block;
   color: #FFFFFF;
   position: relative;
-  /*border-left: 1px solid #FFFFFF;*/
   white-space: normal;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4);
   box-shadow: 0 1px 2px rgba(0,0,0,.4);
-  /*transition: bottom 0.25s, top 0.25s, left 0.25s, opacity 0.50s, -webkit-transform 0.25s;*/
-  -webkit-transition: -webkit-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
-  -moz-transition: -moz-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
-  transition: -ms-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
-  transition: transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
+  -webkit-transition: bottom 0.10s ease-in-out;
+  -moz-transition: bottom 0.10s ease-in-out;
+  transition: bottom 0.10s ease-in-out;
+  transition: bottom 0.10s ease-in-out;
+  bottom: 0px;
 }
 
 .animated {
+  -webkit-transition: -webkit-transform 0.30s ease-in-out;
+  -moz-transition: -moz-transform 0.30s ease-in-out;
+  transition: -ms-transform 0.30s ease-in-out;
+  transition: transform 0.30s ease-in-out;
   opacity: .5;
 }
 

@@ -200,17 +200,27 @@ event.target.setAttribute("class", holder + " animated");
   }
 
   var cardStyle = "";
+  var cardStyleNew = "";
   document.getElementById("playerHand").addEventListener("mouseover", function(event) {
-    if(event.target.classList.contains("card") && playerHand.length > 7) {
+    if(event.target.classList.contains("card")) {
       cardStyle = event.target.getAttribute("style");
-      var cardStyleNew = cardStyle.replace(/z-index: \w*;/, "z-index: " +
-        (playerHand.length + 1) + "; bottom: " + 10 + "px;");
-      event.target.setAttribute("style", cardStyleNew + "; width: 13%; margin-top: -1%");
+      if(playerHand.length > 7) {
+      cardStyleNew = cardStyle.replace(/z-index: \w*;/, "z-index: " + (playerHand.length) + ";");
+      event.target.setAttribute("style", cardStyleNew + "; bottom: 10px;"/*+ "; width: 13%; margin-top: -1%"*/);
+    }
+    else {
+      event.target.setAttribute("style", "z-index: 2; bottom: 10px;"/*+ "; width: 13%; margin-top: -1%"*/);
+    }
     }
   });
   document.getElementById("playerHand").addEventListener("mouseout", function(event) {
-    if(event.target.classList.contains("card") && playerHand.length > 7) {
+    if(event.target.classList.contains("card")) {
+      if(playerHand.length > 7) {
       event.target.setAttribute("style", cardStyle);
+    }
+    else {
+     event.target.removeAttribute("style");
+    }
     }
   });
   document.querySelector("body").addEventListener("click", function(event) {
