@@ -172,17 +172,17 @@ function playWild(computerHand, discardPile, deck, playerHand) {
 }
 
 function takeTurn(playerHand, discardPile, deck, computerHand) {
-  function callbackThing(playableCardH, i, clickCard) {
+  function callbackThing(playableCardH, i, clickCard, event) {
 
     if(playableCardH[i].id === clickCard) {
           document.getElementById("playerWrapper").setAttribute("class", "disabled");
           document.getElementById("drawButton").setAttribute("class", "disabled");
           document.getElementById("passButton").setAttribute("class", "disabled");
-
+console.log(event.target);
           var rect1 = document.querySelector("#discardPile").firstChild.getBoundingClientRect();
           var rect2 = event.target.getBoundingClientRect();
 
-document.styleSheets[1].insertRule(".animated { -webkit-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); }", 0);
+  document.styleSheets[1].insertRule(".animated { -webkit-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); -moz-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); -ms-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); }", 0);
 var holder = event.target.getAttribute("class");
 event.target.setAttribute("class", holder + " animated");
             setTimeout(function() {
@@ -218,7 +218,7 @@ event.target.setAttribute("class", holder + " animated");
     if(event.target.parentNode.id === "playerHand" && document.getElementById("playerWrapper").className !== "disabled" && event.target.classList.contains("card")) {
       var clickCard = event.target.getAttribute("id");
       for(var i = 0; i < playableCardH.length; i++) {
-        callbackThing(playableCardH, i, clickCard);
+        callbackThing(playableCardH, i, clickCard, event);
 
       }
     }
@@ -388,7 +388,7 @@ function initDrawFour() {
       //console.log("B: plays a card " + b);
       var rect1 = document.querySelector("#discardPile").firstChild.getBoundingClientRect();
       var rect2 = document.getElementById(playableCardsPC[0].id).getBoundingClientRect();
-      document.styleSheets[1].insertRule(".animated { -webkit-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); }", 0);
+document.styleSheets[1].insertRule(".animated { -webkit-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); -moz-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); -ms-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); }", 0);
       var holder = document.getElementById(playableCardsPC[0].id).getAttribute("class");
       document.getElementById(playableCardsPC[0].id).setAttribute("class", holder + " animated");
       if(hand.length < 8) {

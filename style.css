@@ -1,9 +1,9 @@
 * {
   border: 0px blue dashed;
   -webkit-user-select: none; /* Prevents highlighting on double-click */
--moz-user-select: none; /* Prevents highlighting on double-click */
--ms-user-select: none; /* Prevents highlighting on double-click */
-
+  -moz-user-select: none; /* Prevents highlighting on double-click */
+  -ms-user-select: none; /* Prevents highlighting on double-click */
+  user-select: none; /* Prevents highlighting on double-click */
 }
 
 body {
@@ -80,6 +80,9 @@ border-left: 1px solid #E0E0E0;
   box-shadow: 0 1px 2px rgba(0,0,0,.4);
   /*transition: bottom 0.25s, top 0.25s, left 0.25s, opacity 0.50s, -webkit-transform 0.25s;*/
   -webkit-transition: -webkit-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
+  -moz-transition: -moz-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
+  transition: -ms-transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
+  transition: transform 0.30s ease-in-out, bottom 0.30s, left 0.30s, opacity 0.30s;
 }
 
 .animated {
