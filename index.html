@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>JUNO</title>
 		<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script type="text/javascript" src="juno.js"></script>
@@ -19,28 +20,42 @@
 	-->
 	<div id="contain">
 		<section id="computerWrapper">
-			<h1>Computer</h1>
+			<h1>computer</h1>
 			<div id="computerHand"></div>
 		</section>
 
 		<section id="discardWrapper">
-			<h1>Discard Pile</h1>
+			<div id="wild" class="hidden">
+				<div class="triangle"></div>
+				<div id="wildMenu"><p>choose a color</p>
+					<button id="Red"></button>
+					<button id="Green"></button>
+					<button id="Blue"></button>
+					<button id="Yellow"></button>
+				</div>
+			</div>
+			<h1>discard pile</h1>
 			<div id="discardPile"></div>
 		</section>
-
-		<section id="playerWrapper">
-			<h1>Player</h1>
-			<button id="drawButton">Draw</button>
+		<section id="playerHead"><div>player</div>
+		</section>
+<!--<h1>Player</h1>-->
+			<!--<button id="drawButton">Draw</button>
 			<button id="passButton" class="disabled">Pass</button>
 			<div id="wild" class="hidden">
 				<button>Blue</button>
 				<button>Green</button>
 				<button>Red</button>
 				<button>Yellow</button>
+			</div>-->
+		<section id="playerWrapper">
+			<div id="sidebar">
+				<button id="drawButton">draw</button>
+			<button id="passButton" class="disabled">pass</button>
 			</div>
 			<div id="playerHand"></div>
 		</section>
+		<div class="tr"></div>
 	</div>
-		</div>
 	</body>
 </html>
