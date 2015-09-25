@@ -97,14 +97,15 @@ border-left: 1px solid #E0E0E0;
 
 #playerHead div { /* Puts "Player" on a transparent background so text will foreground cards */
   background: rgba(0,0,0,0.0);
-  z-index: 99;
+  z-index: 1000;
   position: relative;
 }
 /* Cards */
 
 .card {
   width: 12.8%;
-  margin: 0.74% 0.74%;
+  margin-left: 0.74%;
+  margin-right: 0.74%;
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
@@ -112,7 +113,7 @@ border-left: 1px solid #E0E0E0;
   display: inline-block;
   color: #FFFFFF;
   position: relative;
-  white-space: normal;
+  white-space: normal; /* Cause card text to wrap */
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4);
   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4);
   box-shadow: 0 1px 2px rgba(0,0,0,.4);
@@ -139,6 +140,19 @@ border-left: 1px solid #E0E0E0;
 }
 */
 .card:before { /* Sets card height relative to width */
+  content: "";
+  display: block;
+  padding-top: 148%;
+}
+
+.placeholder {
+  width: 12.8%;
+  margin-left: 0.74%;
+  margin-right: 0.74%;
+  display: inline-block;
+}
+
+.placeholder:before { /* Sets card height relative to width */
   content: "";
   display: block;
   padding-top: 148%;
@@ -238,7 +252,6 @@ button {
 
 #playerHand {
   width: 65%;
-  clear: both;
   white-space: nowrap; /* Prevents cards from breaking to new line */
   display: table-cell;
 }
@@ -415,7 +428,6 @@ bottom: 4%;
   margin-top: 2.4%;
   display: inline;
   color: #000000;
-  background: rgba(255,23,68,1);
 background: rgba(255,23,68,1);
 background: -moz-radial-gradient(center, ellipse cover, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
 background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,23,68,1)), color-stop(100%, rgba(242,22,66,1)));
@@ -575,5 +587,35 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
 
 #wild.hidden {
   opacity: 0;
+  visibility: hidden;
+}
+
+#overlay {
+  visibility: hidden;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index: 1000;
+  background: rgba(0,0,0,0.65);
+}
+
+#gameOver {
+     width:26%;
+     background-color: #fff;
+     text-align:center;
+     font-family: "Josefin Sans";
+     font-size: 45%;
+     top: 28%;
+     position: absolute;
+     left: 37%;
+     height: 40%;
+     z-index: 1001;
+     padding-top: 2%;
+}
+
+#gameOver.hidden {
   visibility: hidden;
 }
