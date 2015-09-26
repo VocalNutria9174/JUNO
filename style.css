@@ -1,3 +1,8 @@
+@font-face {
+    font-family: FARRAY;
+    src: url(FARRAY.otf);
+}
+
 * {
   border: 0px blue dashed;
   -webkit-user-select: none; /* Prevents highlighting on double-click */
@@ -8,7 +13,7 @@
 
 body {
   background-color: #EEEEEE;
-  font-family: "Poiret One";
+  font-family: "FARRAY";
   margin-top: 0%;
   overflow: auto; /* Prevents horizontal scrollbar from appearing */
   max-width: 100%; /* Prevents horizontal scrollbar from appearing */
@@ -21,6 +26,7 @@ section {
   padding-right: 5%;
 }
 */
+/*
 section:nth-of-type(1) {
   padding-top: 0.4%;
   border-left: 1px solid #E0E0E0;
@@ -36,7 +42,7 @@ section:nth-of-type(2) {
   background-color: #FFFFFF;
   padding-left: 5%;
   padding-right: 5%;
-}
+}*/
 /*
 section:nth-of-type(3) {
   background-color: #FFFFFF;
@@ -50,21 +56,29 @@ border-left: 1px solid #E0E0E0;
   width: 65%;
   margin: auto;
   display: table;
+  background-color: #FFFFFF;
+  padding-left: 5%;
+  padding-right: 5%;
+  border-right: 1px solid #E0E0E0;
+  border-left: 1px solid #E0E0E0;
+  position: relative;
 }
 
 #computerHand {
   white-space: nowrap; /* Prevents cards from breaking to new line */
+  border-radius: 0.3em;
 }
 
 #discardWrapper {
   margin: auto;
   width: 65%;
   display: table;
+  background-color: #FFFFFF;
+  padding-left: 5%;
+  padding-right: 5%;
+  border-right: 1px solid #E0E0E0;
+  border-left: 1px solid #E0E0E0;
   position: relative;
-}
-
-#discardWrapper h1 {
-  text-align: center;
 }
 
 #playerWrapper {
@@ -77,30 +91,65 @@ border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
   border-bottom: 1px solid #E0E0E0;
   padding-right: 5%;
+  position: relative;
 }
 
 #playerHead {
-  width: 69.2%;
+  width: 69.6%;
   margin: auto;
   display: table;
     background-color: #FFFFFF;
 border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
   font-size: 45%;
-  font-weight: normal;
-  padding-left: 5.8%;
+  padding-left: 5.4%;
   font-family: "Josefin Sans";
-  color: #006999;
-  padding-top: 1%;
-  padding-bottom: 0.1%
+  color: #597380;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
 }
 
 #playerHead div { /* Puts "Player" on a transparent background so text will foreground cards */
-  background: rgba(0,0,0,0.0);
+  background: rgba(0,0,0,0);
   z-index: 1000;
   position: relative;
 }
 /* Cards */
+
+#discardHead {
+  width: 65%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: auto;
+  display: table;
+  font-size: 45%;
+  font-family: "Josefin Sans";
+  color: #597380;
+  background-color: #FFFFFF;
+  border-left: 1px solid #E0E0E0;
+  border-right: 1px solid #E0E0E0;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+
+  text-align: center;
+}
+
+#computerHead {
+  margin: auto;
+  display: table;
+  font-size: 45%;
+  font-family: "Josefin Sans";
+  color: #597380;
+  background-color: #FFFFFF;
+  padding: 0%;
+  border-left: 1px solid #E0E0E0;
+  border-right: 1px solid #E0E0E0;
+  padding-top: 0.8%;
+  padding-bottom: 0.5%;
+   width: 69.6%;
+  padding-left: 5.4%;
+  
+}
 
 .card {
   width: 12.8%;
@@ -108,7 +157,7 @@ border-left: 1px solid #E0E0E0;
   margin-right: 0.74%;
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
+  border-radius: inherit;
   text-align: center;
   display: inline-block;
   color: #FFFFFF;
@@ -133,6 +182,11 @@ border-left: 1px solid #E0E0E0;
 
 #discardPile .card {
   margin-left: 43.58%;
+  border-radius: inherit;
+}
+
+#discardPile {
+border-radius: 0.3em;
 }
 /*
 #discardWrapper h1 {
@@ -212,6 +266,9 @@ background: -webkit-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%
 background: -o-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 background: -ms-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
+  box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#404040', endColorstr='#000000', GradientType=0 );*/
 }
 
@@ -222,7 +279,7 @@ h1 {
   font-weight: normal;
   font-family: "Josefin Sans";
   margin: 1% 0.8% 0.1% 0.8%;
-  color: #006999;
+  color: #597380;
 }
 
 #playerWrapper h1 {
@@ -239,11 +296,13 @@ button {
 .cardText {
   pointer-events: none; /* Prevents cursor from changing to caret over text */
   position: absolute;
-  margin-top: 22%;
+  margin-top: 27%;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+  opacity: 0.70;
+  font-size: 85%;
 }
 
 #computerHand .cardText {
@@ -254,6 +313,7 @@ button {
   width: 65%;
   white-space: nowrap; /* Prevents cards from breaking to new line */
   display: table-cell;
+  border-radius: 0.3em;
 }
 
 #sidebar {
@@ -274,8 +334,10 @@ background: -o-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 background: -ms-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#404040', endColorstr='#000000', GradientType=0 );*/
-/*border-left: 1px solid #4d4d4d;*/
-box-shadow: -1px -1px 0 #595959;
+/*border-left: 1px solid #597380;*/
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
+  box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
 }
 
 #sidebar button {
@@ -288,7 +350,7 @@ box-shadow: -1px -1px 0 #595959;
   text-decoration: none;
   margin-left: 23%;
   /*border:2px solid #007ab3;*/
-  color: #006999;
+  color: #597380;
   background-color: #FFFFFF;
   -webkit-box-shadow: 0 1px 2px rgba(0,87,128,.4);
   -moz-box-shadow: 0 1px 2px rgba(0,87,128,.4);
@@ -309,7 +371,7 @@ box-shadow: -1px -1px 0 #595959;
 }
 
 #sidebar button:hover {
-  background-color: #006999;
+  background-color: #005780;
   color: #FFFFFF;
   -webkit-box-shadow: 0 1px 2px rgba(0,17,26,.4);
   -moz-box-shadow: 0 1px 2px rgba(0,17,26,.4);
@@ -335,14 +397,13 @@ box-shadow: -1px -1px 0 #595959;
   padding-left: 2.4%;
   z-index: 2;
   width: 25%;
-  height: 18%;
+  height: 22%;
   top: 40%;
   left: 58%;
   position: absolute;
   display: inline-block;
   color: #FFFFFF;
-  background-color: #006999;
-  border: 1px solid #006999;
+  background-color: #005780;
   /*-webkit-box-shadow: 0 1px 2px rgba(0,87,128,.4);
   -moz-box-shadow: 0 1px 2px rgba(0,87,128,.4);
   box-shadow: 0 1px 2px rgba(0,87,128,.4);*/
@@ -375,7 +436,7 @@ bottom: 4%;
     top: 0;
     left: 0;
     padding-top: 141%;
-    background: #006999;
+    background: #597380;
     transform-origin: right bottom;
     transform: rotate(45deg);
 }*/
@@ -395,7 +456,7 @@ bottom: 4%;
     position:absolute;
     top:0; left:0;
     width:100%; height:100%;
-    background-color : #006999;
+    background-color : #005780;
 -webkit-transform-origin: right bottom;
     -moz-transform-origin: right bottom;
     -moz-transform-origin: right bottom;
@@ -570,7 +631,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
     
   text-align:center;
   color:#e2eaf3;
-    font-family:Verdana;
+    font-family:Josefin Sans, "Josefin Sans";
     font-size:1.2em;
     font-weight:bold;
     text-decoration:none;
@@ -591,6 +652,52 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
 }
 
 #overlay {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width:100%;
+  height:100%;
+  z-index: 1000;
+ webkit-transition: background 0.2s linear, visibility 0.2s linear;
+  -moz-transition: background 0.2s linear, visibility 0.2s linear;
+  -ms-transition: background 0.2s linear, visibility 0.2s linear;
+  transition: background 0.2s linear, visibility 0.2s linear;
+  
+  visibility: visible;
+  background: rgba(0,0,0,.6);
+}
+
+#overlay.hidden {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width:100%;
+  height:100%;
+  z-index: 1000;
+  
+  visibility: hidden;
+  background: rgba(0,0,0,0);
+}
+/*
+#overlay {
+  visibility: visible;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index: 1000;
+  background: rgba(0,0,0,1);
+  opacity: 1;
+  webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  -ms-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+
+#overlay .hidden {
   visibility: hidden;
   position: absolute;
   left: 0%;
@@ -599,19 +706,21 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
   height:100%;
   text-align:center;
   z-index: 1000;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,1);
+  opacity: 0;
 }
-
+*/
 #gameOver {
-     width:26%;
+  opacity: .90;
+     width: 20%;
      background-color: #fff;
      text-align:center;
      font-family: "Josefin Sans";
      font-size: 45%;
-     top: 28%;
+     top: 15%;
      position: absolute;
-     left: 37%;
-     height: 40%;
+     left: 40%;
+     height: 50%;
      z-index: 1001;
      padding-top: 2%;
 }

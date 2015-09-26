@@ -43,12 +43,12 @@ function makeCards() { // Initialize deck and create cards
     for(var x = 0; x < 10; x++) {
       var y = 0;
       if(x < 1) {
-        makeDeck(String([x]), color, String([x]) + color + number);
+        makeDeck(x, color, String([x]) + color + number);
         number += 1;
       }
       else {
         while(y < 2) {
-          makeDeck(String([x]), color, String([x]) + color + number);
+          makeDeck(x, color, String([x]) + color + number);
           number += 1;
           y += 1;
         }
@@ -112,7 +112,7 @@ function displayHand(cards, elem) {
     document.getElementById(elem).appendChild(cardDiv1);
     cardDiv1.setAttribute("class", "card " + cards[i].color);
     if(cards.length > 7) {
-      cardDiv1.setAttribute("style", "z-index: " + i + "; right: " + i * (((cards.length - 7) * (0.1428 * 100)) / (cards.length - 1)) + "%");
+      cardDiv1.setAttribute("style", "z-index: " + (i + 1) + "; right: " + i * (((cards.length - 7) * (0.1428 * 100)) / (cards.length - 1)) + "%");
     }
     cardDiv1.setAttribute("id", cards[i].id);
     var cardTextDiv1 = document.createElement("div");
@@ -124,6 +124,15 @@ function displayHand(cards, elem) {
     }
     else {
       cardTextDiv1.innerHTML = cards[i].type;
+      if(typeof cards[i].type === "number") {
+        var cardDivStyle = cardDiv1.getAttribute("style");
+        if(cardDivStyle !== null) {
+        cardDiv1.setAttribute("style", cardDivStyle + "; font-size: 175%");
+        }
+        else {
+          cardDiv1.setAttribute("style", "font-size: 175%");
+        }
+      }
     }
   }
 }
@@ -171,12 +180,14 @@ function playWild(computerHand, discardPile, deck, playerHand) {
     computerTurn(computerHand, discardPile, deck, playerHand);
     }
     else {
-    var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "placeholder");
-    document.getElementById("playerHand").appendChild(cardDiv);
-      overlay();
-      document.getElementById("gameOver").innerHTML = "You won!";
-      document.getElementById("gameOver").removeAttribute("class", "hidden");
+      var cardDiv = document.createElement("div");
+        cardDiv.setAttribute("class", "placeholder");
+        document.getElementById("playerHand").appendChild(cardDiv);
+      setTimeout(function() {
+        overlay();
+        document.getElementById("gameOver").innerHTML = "You won!";
+        document.getElementById("gameOver").removeAttribute("class", "hidden");
+      }, 1000);
     }
   };
 }
@@ -206,11 +217,13 @@ event.target.setAttribute("class", holder + " animated");
           }
           else {
             var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "placeholder");
-    document.getElementById("playerHand").appendChild(cardDiv);
-      overlay();
-      document.getElementById("gameOver").innerHTML = "You won!";
-      document.getElementById("gameOver").removeAttribute("class", "hidden");
+              cardDiv.setAttribute("class", "placeholder");
+              document.getElementById("playerHand").appendChild(cardDiv);
+            setTimeout(function() {
+              overlay();
+              document.getElementById("gameOver").innerHTML = "You won!";
+              document.getElementById("gameOver").removeAttribute("class", "hidden");
+            }, 1000);
           }
   }, 300);
         }
@@ -222,8 +235,11 @@ event.target.setAttribute("class", holder + " animated");
     if(event.target.classList.contains("card")) {
       cardStyle = event.target.getAttribute("style");
       if(playerHand.length > 7) {
-      cardStyleNew = cardStyle.replace(/z-index: \w*;/, "z-index: " + (playerHand.length) + ";");
+      cardStyleNew = cardStyle.replace(/z-index: \w*;/, "z-index: " + (playerHand.length + 1) + ";");
       event.target.setAttribute("style", cardStyleNew + "; bottom: 10px"/*+ "; width: 13%; margin-top: -1%"*/);
+    }
+    else if(cardStyle !== "null") {
+      event.target.setAttribute("style", cardStyle + "; z-index: 2; bottom: 10px"/*+ "; width: 13%; margin-top: -1%"*/);
     }
     else {
       event.target.setAttribute("style", "z-index: 2; bottom: 10px"/*+ "; width: 13%; margin-top: -1%"*/);
@@ -232,12 +248,12 @@ event.target.setAttribute("class", holder + " animated");
   });
   document.getElementById("playerHand").addEventListener("mouseout", function(event) {
     if(event.target.classList.contains("card")) {
-      if(playerHand.length > 7) {
+      //if(playerHand.length > 7) {
       event.target.setAttribute("style", cardStyle);
-    }
-    else {
-     event.target.removeAttribute("style");
-    }
+    //}
+    //else {
+     //event.target.removeAttribute("style");
+    //}
     }
   });
   document.querySelector("body").addEventListener("click", function(event) {
@@ -424,11 +440,13 @@ function initDrawFour() {
       }
       else {
         var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "placeholder");
-    document.getElementById("computerHand").appendChild(cardDiv);
-      overlay();
-      document.getElementById("gameOver").innerHTML = "The computer won.";
-      document.getElementById("gameOver").removeAttribute("class", "hidden");
+          cardDiv.setAttribute("class", "placeholder");
+          document.getElementById("computerHand").appendChild(cardDiv);
+        setTimeout(function() {
+          overlay();
+          document.getElementById("gameOver").innerHTML = "The computer won.";
+          document.getElementById("gameOver").removeAttribute("class", "hidden");
+        }, 1000);
       }
       }, 1000);
     }
@@ -439,11 +457,13 @@ function initDrawFour() {
     }
     else {
       var cardDiv = document.createElement("div");
-    cardDiv.setAttribute("class", "placeholder");
-    document.getElementById("computerHand").appendChild(cardDiv);
-      overlay();
-      document.getElementById("gameOver").innerHTML = "The computer won.";
-      document.getElementById("gameOver").removeAttribute("class", "hidden");
+        cardDiv.setAttribute("class", "placeholder");
+        document.getElementById("computerHand").appendChild(cardDiv);
+      setTimeout(function() {
+        overlay();
+        document.getElementById("gameOver").innerHTML = "The computer takes no joy in your loss.";
+        document.getElementById("gameOver").removeAttribute("class", "hidden");
+      }, 1000);
     }
   }
 
@@ -471,11 +491,15 @@ document.styleSheets[2].insertRule(".animated { -webkit-transform: translate(" +
 }
 
 function overlay() {
-  var el = document.getElementById("overlay");
-  el.style.visibility = (el.style.visibility === "visible") ? "hidden" : "visible";
+  document.getElementById("overlay").removeAttribute("class", "hidden");
 }
 
 makeCards();
+/*setTimeout(function() {
+overlay();
+      document.getElementById("gameOver").innerHTML = "You won!";
+      document.getElementById("gameOver").removeAttribute("class", "hidden");
+    }, 1000);*/
 /*overlay();
 document.getElementById("gameOver").innerHTML = "The computer won.";*/
 });

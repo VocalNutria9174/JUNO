@@ -11,28 +11,25 @@
 	<script type="text/javascript" src="juno.js"></script>
 	</head>
 	<body>
-	<div id="contain">
+	<section id="computerHead"><div>computer<!--(╬ಠ益ಠ)--></div></section>
 		<section id="computerWrapper">
-			<h1>computer</h1>
 			<div id="computerHand"></div>
 		</section>
-
+<section id="discardHead"><div>discard pile</div></section>
 		<section id="discardWrapper">
 			<div id="wild" class="hidden">
 				<div class="triangle"></div>
 				<div id="wildMenu"><p>choose a color</p>
-					<button id="Red"></button>
-					<button id="Green"></button>
-					<button id="Blue"></button>
-					<button id="Yellow"></button>
+					<button class="wildMenu" id="Red"></button>
+					<button class="wildMenu" id="Green"></button>
+					<button class="wildMenu" id="Blue"></button>
+					<button class="wildMenu" id="Yellow"></button>
 				</div>
 			</div>
 			<div id="gameOver" class="hidden"></div>
-			<h1>discard pile</h1>
 			<div id="discardPile"></div>
 		</section>
-		<section id="playerHead"><div>player</div>
-		</section>
+		<section id="playerHead"><div>player</div></section>
 		<section id="playerWrapper">
 			<div id="sidebar">
 				<button id="drawButton">draw</button>
@@ -43,6 +40,5 @@
 		<div class="tr"></div>
 	</div>
 	<div id="overlay" class="hidden">
-	</div>
 	</body>
 </html>
