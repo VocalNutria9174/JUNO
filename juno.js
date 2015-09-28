@@ -3,7 +3,7 @@ accomplishments/challenges:
 replaced all jquery w/ vanilla javascript to handle interaction w/ the DOM
 */
 
-$(document).ready(function() {
+window.onload = function() {
 
 document.body.setScaledFont = function(f) {
   var s = this.offsetWidth, fs = s * f;
@@ -103,6 +103,7 @@ function dealCards(deck) {
   displayHand(playerHand, elem);
   elem = "discardPile";
   displayHand(discardPile, elem);
+  intro();
   takeTurn(playerHand, discardPile, deck, computerHand);
 }
 
@@ -171,9 +172,9 @@ function cPlayCard(card, discardPile, hand, elem) {
 }
 
 function playWild(computerHand, discardPile, deck, playerHand) {
-  document.getElementById("wild").removeAttribute("class", "hidden");
-  document.getElementById("wild").onclick = function(event) {
-    document.getElementById("wild").setAttribute("class", "hidden");
+  document.getElementById("wildMenu").removeAttribute("class", "hidden");
+  document.getElementById("wildMenu").onclick = function(event) {
+    document.getElementById("wildMenu").setAttribute("class", "hidden");
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + event.target.id);
     discardPile[0].color = event.target.id;
     if(playerHand.length > 0) {
@@ -209,6 +210,7 @@ event.target.setAttribute("class", holder + " animated");
     document.styleSheets[2].deleteRule(0);
     var elem = "playerHand";
     cPlayCard(playableCardH[i], discardPile, playerHand, elem);
+    playerFace(playerHand);
     if(playableCardH[i].color === "Wild") {
             playWild(computerHand, discardPile, deck, playerHand);
           }
@@ -277,6 +279,7 @@ event.target.setAttribute("class", holder + " animated");
           e.removeChild(e.lastChild);
         }
       displayHand(playerHand, elem);
+      playerFace(playerHand);
       playableCardH = canPlay(playerHand, discardPile);
       event.target.className = "disabled";
       document.getElementById("passButton").removeAttribute("class", "disabled");
@@ -309,6 +312,7 @@ function playerStartTurn(playerHand, deck, discardPile, computerHand) {
       drawMoreComputer(playerHand, deck, elem, num, discardPile);
     }
   }
+  playerFace(playerHand);
 }
 /*
 function playerStartTurn(playerHand, deck, discardPile, computerHand) {
@@ -350,6 +354,7 @@ function computerTurn(hand, discardPile, deck, playerHand) {
     setTimeout(initDrawTwo, 1000);
   }
   else if(discardPile[0].type === "Wild Draw Four" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
+    //document.getElementById("computerFace").setAttribute("src", "face03.png");
     setTimeout(initDrawFour, 1000);
   }
   else if(discardPile[0].type === "Skip" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
@@ -494,6 +499,49 @@ function overlay() {
   document.getElementById("overlay").removeAttribute("class", "hidden");
 }
 
+function playerFace(playerHand) {
+  if(playerHand.length >= 6) {
+    document.getElementById("playerFace").setAttribute("src", "face04.png");
+  }
+  else if(playerHand.length >= 4) {
+    document.getElementById("playerFace").setAttribute("src", "face05.png");
+  }
+  else if(playerHand.length >= 2) {
+    document.getElementById("playerFace").setAttribute("src", "face01.png");
+  }
+  else if(playerHand.length === 1) {
+    document.getElementById("playerFace").setAttribute("src", "face07.png");
+  }
+}
+
+function intro() {
+  setTimeout(showIntro, 250);
+
+function showIntro() {
+document.getElementById("intro1").removeAttribute("class", "hidden");
+setTimeout(hideIntro, 1800);
+  }
+  function hideIntro() {
+document.getElementById("intro1").setAttribute("class", "hidden");
+setTimeout(showIntro2, 500);
+  }
+  function showIntro2() {
+document.getElementById("intro2").removeAttribute("class", "hidden");
+setTimeout(hideIntro2, 3200);
+  }
+    function hideIntro2() {
+document.getElementById("intro2").setAttribute("class", "hidden");
+setTimeout(showIntro3, 500);
+  }
+  function showIntro3() {
+document.getElementById("intro3").removeAttribute("class", "hidden");
+setTimeout(hideIntro3, 3200);
+  }
+    function hideIntro3() {
+document.getElementById("intro3").setAttribute("class", "hidden");
+  }
+}
+
 makeCards();
 /*setTimeout(function() {
 overlay();
@@ -502,4 +550,4 @@ overlay();
     }, 1000);*/
 /*overlay();
 document.getElementById("gameOver").innerHTML = "The computer won.";*/
-});
+};

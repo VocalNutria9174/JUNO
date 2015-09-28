@@ -11,25 +11,25 @@
 	<script type="text/javascript" src="juno.js"></script>
 	</head>
 	<body>
-	<section id="computerHead"><div>computer<!--(╬ಠ益ಠ)--></div></section>
+	<section id="computerHead"><div><img id="computerFace" src="./images/face02.png"></div></section>
 		<section id="computerWrapper">
 			<div id="computerHand"></div>
 		</section>
-<section id="discardHead"><div>discard pile</div></section>
 		<section id="discardWrapper">
-			<div id="wild" class="hidden">
+				<div id="intro1" class="hidden"><p>The computer (evil).</p><div></div></div>
+				<div id="intro2" class="hidden"><p>The discard pile. Match the color,<br>number or type of this card.</p><div></div></div>
+				<div id="intro3" class="hidden"><p>You — it's your turn! Click on a card to play.<br>If you can't play, draw.</p><div></div></div>
+				<div id="wildMenu" class="hidden"><p>choose a color</p>
 				<div class="triangle"></div>
-				<div id="wildMenu"><p>choose a color</p>
 					<button class="wildMenu" id="Red"></button>
 					<button class="wildMenu" id="Green"></button>
 					<button class="wildMenu" id="Blue"></button>
 					<button class="wildMenu" id="Yellow"></button>
-				</div>
 			</div>
 			<div id="gameOver" class="hidden"></div>
 			<div id="discardPile"></div>
 		</section>
-		<section id="playerHead"><div>player</div></section>
+		<section id="playerHead"><div><img id="playerFace" src="./images/face04.png"></div><!--٩ ๑˃̵ᴗ˂̵ و<br>╭( ･ㅂ･)و<br>╰( ･ ᗜ ･ )╯<br>(⊙ꇴ⊙)<br>٩(^ᴗ^)۶<br>ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ<br>(　＾ڡ＾)<br>ᵕ&nbsp;&nbsp;_&nbsp;&nbsp;ᵕ<br><br>（＾_＾）<br><br>（◕ ◡ ◕）--></section>
 		<section id="playerWrapper">
 			<div id="sidebar">
 				<button id="drawButton">draw</button>
@@ -37,8 +37,6 @@
 			</div>
 			<div id="playerHand"></div>
 		</section>
-		<div class="tr"></div>
-	</div>
-	<div id="overlay" class="hidden">
+	<div id="overlay" class="hidden"></div>
 	</body>
 </html>

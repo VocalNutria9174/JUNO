@@ -1,6 +1,6 @@
 @font-face {
     font-family: FARRAY;
-    src: url(FARRAY.otf);
+    src: url(./fonts/FARRAY.otf);
 }
 
 * {
@@ -79,6 +79,7 @@ border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
   border-left: 1px solid #E0E0E0;
   position: relative;
+  padding-top: 2.1%;
 }
 
 #playerWrapper {
@@ -94,61 +95,72 @@ border-left: 1px solid #E0E0E0;
   position: relative;
 }
 
+img {
+  max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 #playerHead {
-  width: 69.6%;
+  width: 65%;
   margin: auto;
   display: table;
     background-color: #FFFFFF;
 border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
-  font-size: 45%;
-  padding-left: 5.4%;
+  font-size: 50%;
+  padding-left: 5%;
+  padding-right: 5%;
   font-family: "Josefin Sans";
-  color: #597380;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
+  color: #005780;
+  padding-top: 0.6%;
+  padding-bottom: 0.6%;
 }
 
 #playerHead div { /* Puts "Player" on a transparent background so text will foreground cards */
-  background: rgba(0,0,0,0);
-  z-index: 1000;
+  background-color: #FFFFFF;
   position: relative;
+  width: 8.5%;
+  padding-left: .5%;
 }
 /* Cards */
-
+/*
 #discardHead {
   width: 65%;
+  padding: 1%;
   padding-left: 5%;
   padding-right: 5%;
   margin: auto;
   display: table;
-  font-size: 45%;
   font-family: "Josefin Sans";
   color: #597380;
   background-color: #FFFFFF;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-
   text-align: center;
 }
-
+*/
 #computerHead {
   margin: auto;
   display: table;
-  font-size: 45%;
+  font-size: 50%;
   font-family: "Josefin Sans";
-  color: #597380;
+  color: #005780;
   background-color: #FFFFFF;
   padding: 0%;
   border-left: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
-  padding-top: 0.8%;
-  padding-bottom: 0.5%;
-   width: 69.6%;
-  padding-left: 5.4%;
-  
+  padding-top: 0.9%;
+  padding-bottom: 0.6%;
+   width: 65%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+#computerHead div {
+  position: relative;
+  width: 6%;
+  padding-left: 1.5%;
 }
 
 .card {
@@ -397,7 +409,7 @@ background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
   padding-left: 2.4%;
   z-index: 2;
   width: 25%;
-  height: 22%;
+  height: 19%;
   top: 40%;
   left: 58%;
   position: absolute;
@@ -416,41 +428,244 @@ background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 display: inline-block;
 vertical-align: top;
 position: relative;
+
+}
+
+#intro1 {
+    font-size: 45%;
+  font-family: "Josefin Sans";
+  /*padding-top: 1.7%;
+  padding-bottom: 1.7%;*/
+  padding-left: 2.4%;
+  z-index: 2;
+  width: 12.5%;
+  height: 18%;
+  top: 8%;
+  left: 10.5%;
+  position: absolute;
+  display: inline-block;
+  color: #FFFFFF;
+  background-color: #005780;
+  webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  -ms-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  /*visibility: hidden;*/
+}
+
+#intro1.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#intro1 p {
+position: relative;
+bottom: 6%;
+}
+
+#intro1 div{
+    top:-21%;
+    left: 0%;
+    width: 8.46%;
+    padding-bottom:6%;
+    position:absolute;
+    overflow:hidden;
+}
+
+#intro1 div:before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color : #005780;
+-webkit-transform-origin: left top;
+    -moz-transform-origin: left top;
+    -moz-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+#intro2 {
+  line-height: 135%;
+    font-size: 45%;
+  font-family: "Josefin Sans";
+  /*padding-top: 1.7%;
+  padding-bottom: 1.7%;*/
+  padding-left: 2.4%;
+  z-index: 2;
+  width: 19.5%;
+  height: 28.5%;
+  top: 32.5%;
+  left: 20.3%;
+  position: absolute;
+  display: inline-block;
+  color: #FFFFFF;
+  background-color: #005780;
+  webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  -ms-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+  /*visibility: hidden;*/
+}
+
+#intro2.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#intro2 p {
+position: relative;
+bottom: 6%;
+}
+
+#intro2 div{
+    top: 0%;
+    left: 99.9%;
+    width: 5.358%;
+    padding-bottom:3.8%;
+    position:absolute;
+    overflow:hidden;
+}
+
+#intro2 div:before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color : #005780;
+-webkit-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    transform-origin: rleft left bottom;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+
+#intro3 {
+    font-size: 45%;
+  font-family: "Josefin Sans";
+  /*padding-top: 1.7%;
+  padding-bottom: 1.7%;*/
+  padding-left: 2.4%;
+  line-height: 135%;
+  z-index: 2;
+  width: 24.9%;
+  height: 28.5%;
+  top: 67%;
+  left: 10.5%;
+  position: absolute;
+  display: inline-block;
+  color: #FFFFFF;
+  background-color: #005780;
+  webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  -ms-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+}
+
+#intro3 p {
+display: inline-block;
+vertical-align: top;
+position: relative;
+bottom: 6%;
+}
+
+#intro3 div{
+    top: 100%;
+    left: 0%;
+    width: 4.935%;
+    padding-bottom:3.5%;
+    position:absolute;
+    overflow:hidden;
+}
+
+#intro3 div:before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background-color : #005780;
+-webkit-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    -moz-transform-origin: left bottom;
+    transform-origin: rleft left bottom;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#intro3.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/*
+#tr2 {
+  width: 0;
+height: 0;
+border-style: solid;
+border-width: 0 10px 10px 0;
+border-color: transparent #007bff transparent transparent;
+position: relative;
+}
+*/
+/*
+#tr2 {
+    top: 39%;
+    left: 57.2%;
+    width: 1%;
+    height: 0;
+    padding-left:1%;
+    padding-top: 1%;
+    overflow: hidden;
+    position: absolute;
+}
+#tr2:after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    margin-left:-13px;
+    margin-top:-13px;
+
+    border-left: 13px solid transparent;
+    border-right: 0px solid transparent;
+    border-top: 13px solid #4679BD;
+}
+*/
+#wildMenu p {
+display: inline-block;
+vertical-align: top;
+position: relative;
 bottom: 4%;
 }
 
 #wildMenu button:focus {outline:0;} /* Disables highlighting on focus */
-/*
-.triangle {
-  top: 47%;
-  left: 57.1%;
-    width: 1%;
-    position: absolute;
-    transform-origin: left bottom;
-    overflow: hidden;
-}
-
-.triangle:before {
-    content: "";
-    display: block;
-    top: 0;
-    left: 0;
-    padding-top: 141%;
-    background: #597380;
-    transform-origin: right bottom;
-    transform: rotate(45deg);
-}*/
 
 
 .triangle{
-    top: 40%;
-    left: 57.1%;
-    width:1%;
-    padding-bottom:0.709%;
+    top: 0%;
+    left: -4.2%;
+    width:4.23%;
+    padding-bottom:3%;
     position:absolute;
     overflow:hidden;
-
 }
+
 .triangle:before{
     content:'';
     position:absolute;
@@ -465,17 +680,8 @@ bottom: 4%;
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}
 
-}
-/*
-#wild button {
-  width: 5%;
-  height: 5%;
-  border-radius: 50%;
-  background-color: red;
-  margin: 3%;
-}
-*/
 #wildMenu #Red {
   width:10.5%;
   opacity: 0.5;
@@ -586,7 +792,6 @@ background: radial-gradient(ellipse at center, rgba(0,176,255,1) 0%, rgba(0,166,
   opacity: 0.5;
   height: 67%;
   position: relative;
-  
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
@@ -616,28 +821,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
   transform: scale(1.1, 1.1);
 }
 
-/*
-.round-button-circle:hover {
-  background:#30588e;
-}
-.round-button a {
-    display:block;
-  float:left;
-  width:100%;
-  padding-top:50%;
-    padding-bottom:50%;
-  line-height:1em;
-  margin-top:-0.5em;
-    
-  text-align:center;
-  color:#e2eaf3;
-    font-family:Josefin Sans, "Josefin Sans";
-    font-size:1.2em;
-    font-weight:bold;
-    text-decoration:none;
-}*/
-
-#wild {
+#wildMenu {
  webkit-transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
   -moz-transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
   -ms-transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
@@ -646,7 +830,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
   visibility: visible;
 }
 
-#wild.hidden {
+#wildMenu.hidden {
   opacity: 0;
   visibility: hidden;
 }
@@ -664,7 +848,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
   transition: background 0.2s linear, visibility 0.2s linear;
   
   visibility: visible;
-  background: rgba(0,0,0,.6);
+  background: rgba(0,0,0,.5);
 }
 
 #overlay.hidden {
@@ -678,38 +862,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
   visibility: hidden;
   background: rgba(0,0,0,0);
 }
-/*
-#overlay {
-  visibility: visible;
-  position: absolute;
-  left: 0%;
-  top: 0%;
-  width:100%;
-  height:100%;
-  text-align:center;
-  z-index: 1000;
-  background: rgba(0,0,0,1);
-  opacity: 1;
-  webkit-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-  -moz-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-  -ms-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-}
 
-
-#overlay .hidden {
-  visibility: hidden;
-  position: absolute;
-  left: 0%;
-  top: 0%;
-  width:100%;
-  height:100%;
-  text-align:center;
-  z-index: 1000;
-  background: rgba(0,0,0,1);
-  opacity: 0;
-}
-*/
 #gameOver {
   opacity: .90;
      width: 20%;
