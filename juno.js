@@ -501,16 +501,16 @@ function overlay() {
 
 function playerFace(playerHand) {
   if(playerHand.length >= 6) {
-    document.getElementById("playerFace").setAttribute("src", "face04.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/face04.png");
   }
   else if(playerHand.length >= 4) {
-    document.getElementById("playerFace").setAttribute("src", "face05.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/face05.png");
   }
   else if(playerHand.length >= 2) {
-    document.getElementById("playerFace").setAttribute("src", "face01.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/face01.png");
   }
   else if(playerHand.length === 1) {
-    document.getElementById("playerFace").setAttribute("src", "face07.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/face07.png");
   }
 }
 
