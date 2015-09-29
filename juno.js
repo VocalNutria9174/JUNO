@@ -4,7 +4,7 @@ replaced all jquery w/ vanilla javascript to handle interaction w/ the DOM
 */
 
 window.onload = function() {
-
+/*
 function cookie() {
   var now = new Date();
   var time = now.getTime();
@@ -14,7 +14,7 @@ function cookie() {
   document.cookie = 'cookie=ok;expires='+now.toGMTString()+';path=/';
   //console.log(document.cookie);
 }
-
+*/
 document.body.setScaledFont = function(f) {
   var s = this.offsetWidth, fs = s * f;
   this.style.fontSize = fs + '%';
@@ -27,6 +27,7 @@ window.onresize = function() {
 };
 
 function makeCards() { // Initialize deck and create cards
+  var round = 1;
   var deck = [];
   function makeDeck(type, color, id) {
     deck[deck.length] = {
@@ -83,10 +84,10 @@ function makeCards() { // Initialize deck and create cards
       }
     }
   }
-  shuffleDeck(deck);
+  shuffleDeck(deck, round);
 }
 
-function shuffleDeck(deck) { // Shuffle deck
+function shuffleDeck(deck, round) { // Shuffle deck
   var i = deck.length;
   while(i) {
     var x = Math.floor(Math.random() * i--);
@@ -94,10 +95,12 @@ function shuffleDeck(deck) { // Shuffle deck
     deck[i] = deck[x];
     deck[x] = y;
   }
-  dealCards(deck);
+  if(round === 1) {
+  dealCards(deck, round);
+  }
 }
 
-function dealCards(deck) {
+function dealCards(deck, round) {
   var computerHand = [];
   var playerHand = [];
   var discardPile = [];
@@ -113,21 +116,22 @@ function dealCards(deck) {
   discardPile.push(deck[14]);
   deck.splice(0, 15);
   var elem = "computerHand";
-  displayHand(computerHand, elem);
+  displayHand(computerHand, elem, computerHand.length);
   elem = "playerHand";
-  displayHand(playerHand, elem);
+  displayHand(playerHand, elem, playerHand.length);
   elem = "discardPile";
-  displayHand(discardPile, elem);
+  displayHand(discardPile, elem, 1);
   intro();
-  takeTurn(playerHand, discardPile, deck, computerHand);
+  takeTurn(playerHand, discardPile, deck, computerHand, round);
+  //console.log(deck.length);
 }
 
-function displayHand(cards, elem) {
-  for(var i = 0; i < cards.length; i++) {
+function displayHand(cards, elem, num) {
+  for(var i = 0; i < num; i++) {
     var cardDiv1 = document.createElement("div");
     document.getElementById(elem).appendChild(cardDiv1);
     cardDiv1.setAttribute("class", "card " + cards[i].color);
-    if(cards.length > 7) {
+    if(num > 7) {
       cardDiv1.setAttribute("style", "z-index: " + (i + 1) + "; right: " + i * (((cards.length - 7) * (0.1428 * 100)) / (cards.length - 1)) + "%");
     }
     cardDiv1.setAttribute("id", cards[i].id);
@@ -174,26 +178,27 @@ function cPlayCard(card, discardPile, hand, elem) {
     while(e.hasChildNodes()) {
       e.removeChild(e.lastChild);
     }
-  displayHand(hand, elem);
+  }
+  displayHand(hand, elem, hand.length);
   // Move clicked card to top of discard pile (array)
   discardPile.unshift(card);
   // Remove previous card from discard pile (array)
-  discardPile.splice(1, 1);
+  //discardPile.splice(1, 1);
   // Remove previous discard pile (DOM)
   document.querySelector("#discardPile").removeChild(document.querySelector("#discardPile").firstChild);
   // Add new discard pile (DOM)
-  displayHand(discardPile, "discardPile");
-  }
+  displayHand(discardPile, "discardPile", 1);
+  
 }
 
-function playWild(computerHand, discardPile, deck, playerHand) {
+function playWild(computerHand, discardPile, deck, playerHand, round) {
   document.getElementById("wildMenu").removeAttribute("class", "hidden");
   document.getElementById("wildMenu").onclick = function(event) {
     document.getElementById("wildMenu").setAttribute("class", "hidden");
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + event.target.id);
     discardPile[0].color = event.target.id;
     if(playerHand.length > 0) {
-    computerTurn(computerHand, discardPile, deck, playerHand);
+    computerTurn(computerHand, discardPile, deck, playerHand, round);
     }
     else {
       var cardDiv = document.createElement("div");
@@ -208,12 +213,8 @@ function playWild(computerHand, discardPile, deck, playerHand) {
   };
 }
 
-function takeTurn(playerHand, discardPile, deck, computerHand) {
-
-  function callbackThing(playableCardH, i, clickCard, event, holder) {
-
-//    var holder = "";
-    console.log(holder);
+function takeTurn(playerHand, discardPile, deck, computerHand, round) {
+  function callbackThing(playableCardH, i, clickCard, event, holder, round) {
     if(playableCardH[i].id === clickCard) {
       yelp = "true";
           document.getElementById("playerWrapper").setAttribute("class", "disabled");
@@ -223,7 +224,6 @@ function takeTurn(playerHand, discardPile, deck, computerHand) {
           var rect2 = event.target.getBoundingClientRect();
 
   document.styleSheets[2].insertRule(".animated { -webkit-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); -moz-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); -ms-transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); transform: translate(" + (rect1.left - rect2.left) + "px, " + (rect1.top - rect2.top) + "px); }", 0);
-//holder = event.target.getAttribute("class");
 event.target.setAttribute("class", holder + " animated");
             setTimeout(function() {
     document.styleSheets[2].deleteRule(0);
@@ -231,10 +231,10 @@ event.target.setAttribute("class", holder + " animated");
     cPlayCard(playableCardH[i], discardPile, playerHand, elem);
     playerFace(playerHand);
     if(playableCardH[i].color === "Wild") {
-            playWild(computerHand, discardPile, deck, playerHand);
+            playWild(computerHand, discardPile, deck, playerHand, round);
           }
           else if(playerHand.length > 0) {
-            computerTurn(computerHand, discardPile, deck, playerHand);
+            computerTurn(computerHand, discardPile, deck, playerHand, round);
           }
           else {
             var cardDiv = document.createElement("div");
@@ -247,11 +247,6 @@ event.target.setAttribute("class", holder + " animated");
             }, 1000);
           }
   }, 300);
-      // else {
-     //   console.log("test");
-//event.target.setAttribute("class", holder + " shake");
-      // }
-  //console.log(yelp);
   }
 }
 
@@ -284,36 +279,38 @@ event.target.setAttribute("class", holder + " animated");
       var clickCard = event.target.getAttribute("id");
       var holder = event.target.getAttribute("class");
       for(var i = 0; i < playableCardH.length; i++) {
-        callbackThing(playableCardH, i, clickCard, event, holder);
+        callbackThing(playableCardH, i, clickCard, event, holder, round);
       if(i === (playableCardH.length - 1) && !(event.target.classList.contains("animated"))) {
         event.target.setAttribute("class", holder + " shake");
         setTimeout(wait, 600);
       }
-      //console.log(yelp);
       }
-      //console.log(yelp);
-        //  }
     }
     else if(event.target.innerHTML === "draw" && event.target.className !== "disabled") {
       // Move card from front of deck to hand
+      checkDeck(deck, discardPile, round);
       playerHand.push(deck[0]);
       deck.splice(0, 1);
       var elem = "playerHand";
-      //var newComputerCard = [];
-      //newComputerCard.push(hand[hand.length - 1]);
         var e = document.getElementById("playerHand");
         while(e.hasChildNodes()) {
           e.removeChild(e.lastChild);
         }
-      displayHand(playerHand, elem);
+      displayHand(playerHand, elem, playerHand.length);
       playerFace(playerHand);
       playableCardH = canPlay(playerHand, discardPile);
       event.target.className = "disabled";
       document.getElementById("passButton").removeAttribute("class", "disabled");
+          //for(j = 0; j < discardPile.length; j++) {
+  //console.log(j + ": " + discardPile[j].id);
+//}
+//console.log(deck.length);
+//console.log("deck: " + deck.length);
+//console.log("discard pile: " + discardPile.length);
     }
     else if(event.target.innerHTML === "pass" && document.getElementById("drawButton").className === "disabled" && event.target.className !== "disabled") {
       //playableCardsPC = canPlay(computerHand, discardPile);
-      computerTurn(computerHand, discardPile, deck, playerHand);
+      computerTurn(computerHand, discardPile, deck, playerHand, round);
       event.target.className = "disabled";
       document.getElementById("playerWrapper").setAttribute("class", "disabled");
     }
@@ -323,43 +320,46 @@ event.target.setAttribute("class", holder + " animated");
   });
 }
 
-function playerStartTurn(playerHand, deck, discardPile, computerHand) {
+function playerStartTurn(playerHand, deck, discardPile, computerHand, round) {
   var elem = "playerHand";
   var num = null;
   if(discardPile[0].type === "Skip" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + discardPile[0].color + " disabled");
-    computerTurn(computerHand, discardPile, deck, playerHand);
+    computerTurn(computerHand, discardPile, deck, playerHand, round);
   }
   else {
     document.getElementById("playerWrapper").removeAttribute("class", "disabled");
     document.getElementById("drawButton").removeAttribute("class", "disabled");
     if(discardPile[0].type === "Draw Two" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
       num = 2;
-      drawMoreComputer(playerHand, deck, elem, num, discardPile);
+      drawMoreComputer(playerHand, deck, elem, num, discardPile, round);
     }
     else if(discardPile[0].type === "Wild Draw Four" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
       num = 4;
-      drawMoreComputer(playerHand, deck, elem, num, discardPile);
+      drawMoreComputer(playerHand, deck, elem, num, discardPile, round);
     }
   }
   playerFace(playerHand);
 }
 
-function drawMoreComputer(hand, deck, elem, num, discardPile) {
+function drawMoreComputer(hand, deck, elem, num, discardPile, round) {
   for(var i = 0; i < num; i++) {
-    hand.push(deck[i]);
+    checkDeck(deck, discardPile, round);
+    hand.push(deck[0]);
+    deck.splice(0, 1);
   }
   var e = document.getElementById(elem);
     while(e.hasChildNodes()) {
       e.removeChild(e.lastChild);
     }
-  displayHand(hand, elem);
-    deck.splice(0, num);
+  displayHand(hand, elem, hand.length);
+    //deck.splice(0, num);
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + discardPile[0].color + " disabled");
   }
 
-function computerTurn(hand, discardPile, deck, playerHand) {
-
+function computerTurn(hand, discardPile, deck, playerHand, round) {
+//console.log("deck: " + deck.length);
+  //console.log("discard pile: " + discardPile.length);
   var playableCardsPC = canPlay(hand, discardPile);
 
   if(discardPile[0].type === "Draw Two" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
@@ -371,7 +371,7 @@ function computerTurn(hand, discardPile, deck, playerHand) {
   }
   else if(discardPile[0].type === "Skip" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + discardPile[0].color + " disabled");
-    playerStartTurn(playerHand, deck, discardPile, hand);
+    playerStartTurn(playerHand, deck, discardPile, hand, round);
   }
   else if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -385,7 +385,7 @@ function computerTurn(hand, discardPile, deck, playerHand) {
     //console.log("X1: Draw Two on the discard pile");
     var elem = "computerHand";
     var num = 2;
-    drawMoreComputer(hand, deck, elem, num, discardPile);
+    drawMoreComputer(hand, deck, elem, num, discardPile, round);
     playableCardsPC = canPlay(hand, discardPile);
     if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -399,7 +399,7 @@ function initDrawFour() {
     //console.log("X2: Draw Four on the discard pile");
     var elem = "computerHand";
     var num = 4;
-    drawMoreComputer(hand, deck, elem, num, discardPile);
+    drawMoreComputer(hand, deck, elem, num, discardPile, round);
     playableCardsPC = canPlay(hand, discardPile);
     if(playableCardsPC.length < 1) {
     setTimeout(computerDrawCard, 1000);
@@ -412,6 +412,7 @@ function initDrawFour() {
   function computerDrawCard() {
     //var a = Math.floor(Date.now() / 1000);
     //console.log("A: no playable cards; draws a card " + a);
+    checkDeck(deck, discardPile, round);
     hand.push(deck[0]);
     deck.splice(0, 1);
     var elem = "computerHand";
@@ -419,7 +420,7 @@ function initDrawFour() {
     while(e.hasChildNodes()) {
       e.removeChild(e.lastChild);
     }
-    displayHand(hand, elem);
+    displayHand(hand, elem, hand.length);
     setTimeout(computerPlayCard, 1000);
   }
 
@@ -443,7 +444,7 @@ function initDrawFour() {
         document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
         discardPile[0].color = colorsSorted[0];
         if(hand.length > 0) {
-        playerStartTurn(playerHand, deck, discardPile, hand);
+        playerStartTurn(playerHand, deck, discardPile, hand, round);
       }
       else {
         var cardDiv = document.createElement("div");
@@ -458,7 +459,7 @@ function initDrawFour() {
       }, 1000);
     }
     else if(hand.length > 0) {
-      playerStartTurn(playerHand, deck, discardPile, hand);
+      playerStartTurn(playerHand, deck, discardPile, hand, round);
       //var d2 = Math.floor(Date.now() / 1000);
       //console.log("D2: turn ends - played a card (not wild) " + d2);
     }
@@ -490,7 +491,7 @@ document.styleSheets[2].insertRule(".animated { -webkit-transform: translate(" +
       setTimeout(CPC, 300);
     }
     else {
-      playerStartTurn(playerHand, deck, discardPile, hand);
+      playerStartTurn(playerHand, deck, discardPile, hand, round);
       //var d1 = Math.floor(Date.now() / 1000);
       //console.log("D1: turn ends - drew a card but had nothing to play" + d1);
     }
@@ -544,7 +545,31 @@ document.getElementById("intro3").setAttribute("class", "hidden");
   }
 }
 
-cookie();
+function checkDeck(deck, discardPile, round) {
+  if(deck.length === 0) {
+    console.log("start - deck length: " + deck.length);
+    round++;
+    for(i = 1; i < discardPile.length; i++) {
+      if(discardPile[i].type === "Wild" || discardPile[i].type === "Wild Draw Four") {
+        discardPile[i].color = "Wild";
+      }
+      deck.push(discardPile[i]);
+    }
+    discardPile.splice(1, discardPile.length);
+    shuffleDeck(deck, round);
+    console.log("end - deck length: " + deck.length);
+    console.log("deck:");
+    for(i = 0; i < deck.length; i++) {
+      console.log(i + deck[i].id);
+    }
+    console.log("discard pile:");
+    for(i = 0; i < discardPile.length; i++) {
+      console.log(i + discardPile[i].id);
+    }
+  }
+}
+
+//cookie();
 makeCards();
 /*setTimeout(function() {
 overlay();
