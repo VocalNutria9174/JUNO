@@ -852,7 +852,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
 }
 
 #overlay {
-  position: absolute;
+  position: fixed;
   left: 0%;
   top: 0%;
   width:100%;
@@ -868,7 +868,7 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
 }
 
 #overlay.hidden {
-  position: absolute;
+  position: fixed;
   left: 0%;
   top: 0%;
   width:100%;

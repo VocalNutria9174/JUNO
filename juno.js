@@ -477,7 +477,7 @@ function initDrawFour() {
         document.getElementById("computerHand").appendChild(cardDiv);
       setTimeout(function() {
         overlay();
-        document.getElementById("gameOver").innerHTML = "The computer takes no joy in your loss.";
+        document.getElementById("gameOver").innerHTML = "The computer won.";
         document.getElementById("gameOver").removeAttribute("class", "hidden");
       }, 1000);
     }
