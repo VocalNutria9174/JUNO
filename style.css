@@ -100,6 +100,16 @@ img {
   max-width: 100%;
     height: auto;
     display: block;
+    position: relative;
+    transition: 0.4s;
+  transform-style: preserve-3d;
+  transform: translateY(0%);
+  /* scale(1.0,1.0) translateY(0%);*/
+}
+
+img.anim {
+  transform: translateY(-70%);
+  /* scale(1.4,1.4) translateY(-70%);*/
 }
 
 #playerHead {
@@ -426,6 +436,7 @@ background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 }
 
 #wildMenu p {
+  pointer-events: none; /* Prevents cursor from changing to caret over text */
 display: inline-block;
 vertical-align: top;
 position: relative;
@@ -462,6 +473,7 @@ position: relative;
 }
 
 #intro1 p {
+  pointer-events: none; /* Prevents cursor from changing to caret over text */
 position: relative;
 bottom: 6%;
 }
@@ -523,6 +535,7 @@ bottom: 6%;
 }
 
 #intro2 p {
+  pointer-events: none; /* Prevents cursor from changing to caret over text */
 position: relative;
 bottom: 6%;
 }
@@ -578,6 +591,7 @@ bottom: 6%;
 }
 
 #intro3 p {
+  pointer-events: none; /* Prevents cursor from changing to caret over text */
 display: inline-block;
 vertical-align: top;
 position: relative;
@@ -649,6 +663,7 @@ position: relative;
 }
 */
 #wildMenu p {
+  pointer-events: none; /* Prevents cursor from changing to caret over text */
 display: inline-block;
 vertical-align: top;
 position: relative;
@@ -889,26 +904,26 @@ background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,22
 
 @keyframes shake {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
 
   20% {
-    transform: translateX(-10px);
+    transform: translateX(-5%);
   }
 
   40% {
-    transform: translateX(10px);
+    transform: translateX(5%);
   }
 
   60% {
-    transform: translateX(-10px);
+    transform: translateX(-5%);
   }
 
   80% {
-    transform: translateX(10px);
+    transform: translateX(5%);
   }
 
   100% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
 }

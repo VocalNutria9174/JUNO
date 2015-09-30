@@ -194,6 +194,9 @@ function cPlayCard(card, discardPile, hand, elem) {
 function playWild(computerHand, discardPile, deck, playerHand, round) {
   document.getElementById("wildMenu").removeAttribute("class", "hidden");
   document.getElementById("wildMenu").onclick = function(event) {
+  if(event.target.parentNode.id === "wildMenu" && event.target.tagName === "BUTTON") {
+
+
     document.getElementById("wildMenu").setAttribute("class", "hidden");
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + event.target.id);
     discardPile[0].color = event.target.id;
@@ -210,7 +213,8 @@ function playWild(computerHand, discardPile, deck, playerHand, round) {
         document.getElementById("gameOver").removeAttribute("class", "hidden");
       }, 1000);
     }
-  };
+  }
+};
 }
 
 function takeTurn(playerHand, discardPile, deck, computerHand, round) {
@@ -330,6 +334,10 @@ function playerStartTurn(playerHand, deck, discardPile, computerHand, round) {
   else {
     document.getElementById("playerWrapper").removeAttribute("class", "disabled");
     document.getElementById("drawButton").removeAttribute("class", "disabled");
+    document.getElementById("playerFace").setAttribute("class", "anim");
+    setTimeout(function() {
+      document.getElementById("playerFace").removeAttribute("class", "anim");
+    }, 400);
     if(discardPile[0].type === "Draw Two" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
       num = 2;
       drawMoreComputer(playerHand, deck, elem, num, discardPile, round);
@@ -504,7 +512,7 @@ function overlay() {
 
 function playerFace(playerHand) {
   if(playerHand.length >= 6) {
-    document.getElementById("playerFace").setAttribute("src", "./images/face04.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/face00.png");
   }
   else if(playerHand.length >= 4) {
     document.getElementById("playerFace").setAttribute("src", "./images/face05.png");
