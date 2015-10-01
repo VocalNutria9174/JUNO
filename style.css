@@ -195,7 +195,7 @@ border-left: 1px solid #E0E0E0;
 }
 
 .card {
-  line-height: 110%;
+  line-height: 100%;
   width: 12.8%;
   margin-left: 0.74%;
   margin-right: 0.74%;
@@ -635,7 +635,7 @@ bottom: 6%;
 -webkit-transform-origin: left bottom;
     -moz-transform-origin: left bottom;
     -moz-transform-origin: left bottom;
-    transform-origin: rleft left bottom;
+    transform-origin: left bottom;
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
@@ -694,7 +694,7 @@ bottom: 4%;
 
 .triangle{
     top: 0%;
-    left: -4.2%;
+    left: -4.1%;
     width:4.23%;
     padding-bottom:3%;
     position:absolute;
@@ -721,13 +721,14 @@ bottom: 4%;
   width:10.5%;
   opacity: 0.5;
   height: 63%;
+  
   position: relative;
   
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
   margin-left: 3.3%;
-  margin-top: 2.4%;
+  margin-top: 2.7%;
   display: inline;
   color: #000000;
 background: rgba(255,23,68,1);
@@ -756,13 +757,14 @@ background: radial-gradient(ellipse at center, rgba(255,23,68,1) 0%, rgba(242,22
   width:10.5%;
   opacity: 0.5;
   height: 63%;
+  
   position: relative;
   
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
   margin-left: 3.3%;
-  margin-top: 1%;
+  margin-top: 2.7%;
   display: inline;
   color: #000000;
 background: rgba(0,230,118,1);
@@ -791,13 +793,14 @@ background: radial-gradient(ellipse at center, rgba(0,230,118,1) 0%, rgba(0,217,
   width:10.5%;
   opacity: 0.5;
   height: 63%;
+  
   position: relative;
   
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
   margin-left: 3.3%;
-  margin-top: 1%;
+  margin-top: 2.7%;
   display: inline-block;
   color: #000000;
 background: rgba(0,176,255,1);
@@ -826,12 +829,13 @@ background: radial-gradient(ellipse at center, rgba(0,176,255,1) 0%, rgba(0,166,
   width:10.5%;
   opacity: 0.5;
   height: 63%;
+  
   position: relative;
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
   margin-left: 3.3%;
-  margin-top: 1%;
+  margin-top: 2.7%;
   display: inline-block;
   color: #000000;
 background: rgba(255,234,0,1);

@@ -1,20 +1,5 @@
-/* to do:
-accomplishments/challenges:
-replaced all jquery w/ vanilla javascript to handle interaction w/ the DOM
-*/
-
 window.onload = function() {
-/*
-function cookie() {
-  var now = new Date();
-  var time = now.getTime();
-  var expireTime = time + 1000*36000;
-  now.setTime(expireTime);
-  var tempExp = 'Wed, 31 Oct 2012 08:50:17 GMT';
-  document.cookie = 'cookie=ok;expires='+now.toGMTString()+';path=/';
-  //console.log(document.cookie);
-}
-*/
+
 document.body.setScaledFont = function(f) {
   var s = this.offsetWidth, fs = s * f;
   this.style.fontSize = fs + '%';
@@ -200,19 +185,19 @@ function playWild(computerHand, discardPile, deck, playerHand, round) {
     document.getElementById("wildMenu").setAttribute("class", "hidden");
     document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + event.target.id);
     discardPile[0].color = event.target.id;
-    if(playerHand.length > 0) {
+    //if(playerHand.length > 0) {
     computerTurn(computerHand, discardPile, deck, playerHand, round);
-    }
-    else {
-      var cardDiv = document.createElement("div");
-        cardDiv.setAttribute("class", "placeholder");
-        document.getElementById("playerHand").appendChild(cardDiv);
-      setTimeout(function() {
-        overlay();
-        document.getElementById("gameOver").innerHTML = "You won!";
-        document.getElementById("gameOver").removeAttribute("class", "hidden");
-      }, 1000);
-    }
+    //}
+    //else {
+      //var cardDiv = document.createElement("div");
+        //cardDiv.setAttribute("class", "placeholder");
+        //document.getElementById("playerHand").appendChild(cardDiv);
+      //setTimeout(function() {
+        //overlay();
+        //document.getElementById("gameOver").innerHTML = "You won!";
+        //document.getElementById("gameOver").removeAttribute("class", "hidden");
+      //}, 1000);
+    //}
   }
 };
 }
@@ -220,7 +205,6 @@ function playWild(computerHand, discardPile, deck, playerHand, round) {
 function takeTurn(playerHand, discardPile, deck, computerHand, round) {
   function callbackThing(playableCardH, i, clickCard, event, holder, round) {
     if(playableCardH[i].id === clickCard) {
-      yelp = "true";
           document.getElementById("playerWrapper").setAttribute("class", "disabled");
           document.getElementById("drawButton").setAttribute("class", "disabled");
           document.getElementById("passButton").setAttribute("class", "disabled");
@@ -234,7 +218,7 @@ event.target.setAttribute("class", holder + " animated");
     var elem = "playerHand";
     cPlayCard(playableCardH[i], discardPile, playerHand, elem);
     playerFace(playerHand);
-    if(playableCardH[i].color === "Wild") {
+    if(playableCardH[i].color === "Wild" && playerHand.length > 0) {
             playWild(computerHand, discardPile, deck, playerHand, round);
           }
           else if(playerHand.length > 0) {
@@ -583,7 +567,6 @@ function checkDeck(deck, discardPile, round) {
   }
 }
 
-//cookie();
 makeCards();
 /*setTimeout(function() {
 overlay();
