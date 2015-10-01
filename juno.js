@@ -145,13 +145,13 @@ function displayHand(cards, elem, num) {
     else {
       cardTextDiv1.innerHTML = cards[i].type;
       if(typeof cards[i].type === "number") {
-        var cardDivStyle = cardDiv1.getAttribute("style");
-        if(cardDivStyle !== null) {
-        cardDiv1.setAttribute("style", cardDivStyle + "; font-size: 175%");
-        }
-        else {
-          cardDiv1.setAttribute("style", "font-size: 175%");
-        }
+        //var cardDivStyle = cardDiv1.getAttribute("style");
+        //if(cardDivStyle !== null) {
+        cardDiv1.firstChild.setAttribute("style", "font-size: 170%; margin-top: 39.5%");
+        //}
+        //else {
+        //  cardDiv1.setAttribute("style", "font-size: 175%; margin-top: 25%");
+        //}
       }
     }
   }
@@ -277,6 +277,9 @@ event.target.setAttribute("class", holder + " animated");
     }
   });
   document.querySelector("body").addEventListener("click", function(event) {
+    if(!(document.getElementById("intro3").classList.contains("hidden")) && (event.target.parentNode.id === "playerHand" || event.target.innerHTML === "draw")) {
+      document.getElementById("intro3").setAttribute("class", "hidden");
+    }
     //var yelp = false;
     var playableCardH = canPlay(playerHand, discardPile);
     if(event.target.parentNode.id === "playerHand" && document.getElementById("playerWrapper").className !== "disabled" && event.target.classList.contains("card")) {
@@ -512,23 +515,26 @@ function overlay() {
 
 function playerFace(playerHand) {
   if(playerHand.length >= 6) {
-    document.getElementById("playerFace").setAttribute("src", "./images/face00.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/oldFaces/face00.png");
   }
   else if(playerHand.length >= 4) {
-    document.getElementById("playerFace").setAttribute("src", "./images/face05.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/oldFaces/face05.png");
   }
   else if(playerHand.length >= 2) {
-    document.getElementById("playerFace").setAttribute("src", "./images/face01.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/oldFaces/face01.png");
   }
   else if(playerHand.length === 1) {
-    document.getElementById("playerFace").setAttribute("src", "./images/face07.png");
+    document.getElementById("playerFace").setAttribute("src", "./images/oldFaces/face07.png");
   }
 }
 
 function intro() {
-  setTimeout(showIntro, 250);
-
+  setTimeout(showIntro, 500);
 function showIntro() {
+document.getElementById("intro3").removeAttribute("class", "hidden");
+  }
+
+/*function showIntro() {
 document.getElementById("intro1").removeAttribute("class", "hidden");
 setTimeout(hideIntro, 1800);
   }
@@ -550,7 +556,7 @@ setTimeout(hideIntro3, 3200);
   }
     function hideIntro3() {
 document.getElementById("intro3").setAttribute("class", "hidden");
-  }
+  }*/
 }
 
 function checkDeck(deck, discardPile, round) {
