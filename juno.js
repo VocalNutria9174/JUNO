@@ -439,7 +439,7 @@ function initDrawFour() {
     document.styleSheets[2].deleteRule(0);
     var elem = "computerHand";
     cPlayCard(playableCardsPC[0], discardPile, hand, elem);
-    if(playableCardsPC[0].color === "Wild") {
+    if(playableCardsPC[0].color === "Wild" && hand.length > 0) {
       var handColors = {};
       hand.forEach(function(i) {
         handColors[i.color] = (handColors[i.color] || 0 ) + 1;
@@ -454,19 +454,19 @@ function initDrawFour() {
       setTimeout(function() {
         document.querySelector("#discardPile").firstChild.setAttribute("class", "card " + colorsSorted[0]);
         discardPile[0].color = colorsSorted[0];
-        if(hand.length > 0) {
+        //if(hand.length > 0) {
         playerStartTurn(playerHand, deck, discardPile, hand, round);
-      }
-      else {
-        var cardDiv = document.createElement("div");
-          cardDiv.setAttribute("class", "placeholder");
-          document.getElementById("computerHand").appendChild(cardDiv);
-        setTimeout(function() {
-          overlay();
-          document.getElementById("gameOver").innerHTML = "The computer won.";
-          document.getElementById("gameOver").removeAttribute("class", "hidden");
-        }, 1000);
-      }
+      //}
+      //else {
+        //var cardDiv = document.createElement("div");
+          //cardDiv.setAttribute("class", "placeholder");
+          //document.getElementById("computerHand").appendChild(cardDiv);
+        //setTimeout(function() {
+          //overlay();
+          //document.getElementById("gameOver").innerHTML = "The computer won.";
+          //document.getElementById("gameOver").removeAttribute("class", "hidden");
+        //}, 1000);
+      //}
       }, 1000);
     }
     else if(hand.length > 0) {
