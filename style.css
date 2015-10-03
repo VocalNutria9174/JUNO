@@ -155,9 +155,9 @@ border-left: 1px solid #E0E0E0;
   position: relative;
   /*width: 6%;
   padding-left: 1.5%;*/
-  left: 8.5%;
+  left: 8%;
   top: 12%;
-  width: 8.6%;
+  width: 9.7%;
   position: absolute;
   transition: 0.4s;
 }
@@ -355,6 +355,7 @@ background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
 }
 
 #sidebar div {
+cursor:default;
   position: relative;
   font-size: 40%;
   font-family: "montserrat-light";
@@ -404,6 +405,7 @@ background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
   }
 
 #sidebar div:focus {outline:0;} /* Disables highlighting on focus */
+
 
 #wildMenu {
   line-height: 140%;
@@ -555,7 +557,6 @@ bottom: 6%;
 
 #intro3 {
     font-size: 40%;
-
   font-family: "montserrat-light";
   /*padding-top: 1.7%;
   padding-bottom: 1.7%;*/
@@ -565,7 +566,7 @@ bottom: 6%;
   width: 23%;
   height: 28.5%;
   top: 51%;
-  left: 10.5%;
+  left: 11.5%;
   position: absolute;
   display: inline-block;
   color: #FFFFFF;
@@ -963,8 +964,8 @@ border-left: 1px solid #E0E0E0;
 
 #playerHead div {
   top: -110%;
-  left: 8.5%;
-  width: 8.6%;
+  left: 8%;
+  width: 9.7%;
   position: absolute;
   transition: 0.4s;
 }
