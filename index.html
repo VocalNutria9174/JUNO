@@ -7,44 +7,54 @@
 		<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css"/>
-	<script type="text/javascript" src="juno.js"></script>
+		<script type="text/javascript" src="juno.js"></script>
 	</head>
 	<body>
-	<div id="contain">
-	<section id="computerHead"><div id="computerFace" class="hide"><img src="./images/computerFace03.png" alt="computer face"></div></section>
-		<section id="computerWrapper">
-			<div id="computerHand"></div>
-		</section>
-		<section id="discardWrapper">
-				<!--<div id="intro1" class="hidden"><p>The computer (evil).</p><div></div></div>
-				<div id="intro2" class="hidden"><p>The discard pile. Match the color,<br>number or type of this card.</p><div></div></div>-->
-				<div id="intro3" class="hidden"><p>It's your turn! Click on a card to play.<br>If you can't play, draw.</p><div></div></div>
-				<div id="wildMenu" class="hidden"><p>choose a color</p>
-				<div class="triangle"></div>
+		<div id="contain">
+			<section id="computerHead">
+				<div id="computerFace" class="hide">
+					<img src="./images/computerFace03.png" alt="computer face">
+				</div>
+			</section>
+			<section id="computerWrapper">
+				<div id="computerHand"></div>
+			</section>
+			<section id="discardWrapper">
+				<div id="intro3" class="hidden">
+					<p>It's your turn! Click on a card to play.<br>If you can't play, draw.</p>
+					<div></div>
+				</div>
+				<div id="wildMenu" class="hidden">
+					<p>choose a color</p>
+					<div class="triangle"></div>
 					<button class="wildMenu" id="Red"></button>
 					<button class="wildMenu" id="Green"></button>
 					<button class="wildMenu" id="Blue"></button>
 					<button class="wildMenu" id="Yellow"></button>
-			</div>
-			<div id="gameOver" class="hidden"><div id="message"></div><img><div class="container">Play again?
-			<div class="play">yes</div>
-			<div class="play">no</div></div>
-			<!--<button>yes</button>
-			<button>no</button>-->
-			</div>
-			<!--<div id="computerWin" class="gameOver hidden"><img src="./images/computerWin.png"></div>-->
-			<div id="discardPile"></div>
-		</section>
-		<section id="playerHead"><div id="playerFace"><img src="./images/playerFace04.png" alt="player face"></div></section>
-		<section id="playerWrapper">
-			<div id="sidebar">
-				<div id="drawButton">draw</div>
-			<div id="passButton" class="disabled">pass</div>
-			</div>
-			<div id="playerHand"></div>
-		</section>
-	<div id="overlay" class="hidden"></div>
-	</div>
-	<!--<div style="font-family: sans-serif; background-color: white; font-size: 40px">(|||❛︵❛.)(⌯˃̶᷄ ﹏ ˂̶᷄⌯)ﾟ(.﹒︠₋﹒︡.)(◍•﹏•)<br>xyz<br>༼ ༎ຶ ෴ ༎ຶ༽（￣へ￣）（￣＾￣）(＾⌒＾*)(ꐦ ಠ皿ಠ )(╬⓪益⓪)ಥ‿ಥ( ๑‾̀◡‾́)σ»(*^ิ益^ิ*)(•‿•)⊂( ・ ̫・)⊃( ￣ω￣ )（ ＾ ｖ ＾ ）٩ ๑˃̵ᴗ˂̵ و<br>╭( ･ㅂ･)و<br>╰( ･ ᗜ ･ )╯<br>(╬ಠ益ಠ)<br>(⊙ꇴ⊙)<br>٩(^ᴗ^)۶<br>ﾟ･✿ヾ╲(｡◕‿◕｡)╱✿･ﾟ<br>(　＾ڡ＾)<br>ᵕ_ᵕ:<br><br>（＾_＾）<br><br>（◕ ◡ ◕）<br>ʕ •̀ o •́ ʔ</div>-->
+				</div>
+				<div id="gameOver" class="hidden">
+					<div id="message"></div>
+					<img>
+					<div class="container">Play again?
+						<div class="play">yes</div>
+						<div class="play">no</div>
+					</div>
+				</div>
+				<div id="discardPile"></div>
+			</section>
+			<section id="playerHead">
+				<div id="playerFace">
+					<img src="./images/playerFace04.png" alt="player face">
+				</div>
+			</section>
+			<section id="playerWrapper">
+				<div id="sidebar">
+					<div id="drawButton">draw</div>
+					<div id="passButton" class="disabled">pass</div>
+				</div>
+				<div id="playerHand"></div>
+			</section>
+			<div id="overlay" class="hidden"></div>
+		</div>
 	</body>
 </html>
