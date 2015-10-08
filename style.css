@@ -121,12 +121,12 @@ body {
   bottom: 0px;
 }
 
-.animated {
+.playCard {
   -webkit-transition: -webkit-transform 0.30s ease-in-out;
   -moz-transition: -moz-transform 0.30s ease-in-out;
   transition: -ms-transform 0.30s ease-in-out;
   transition: transform 0.30s ease-in-out;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 #discardPile .card {
@@ -320,7 +320,7 @@ body {
   position: relative;
 }
 
-#intro3 {
+#welcomeMessage {
   font-size: 40%;
   font-family: "montserrat-light";
   padding-left: 2.4%;
@@ -342,7 +342,7 @@ body {
   visibility: visible;
 }
 
-#intro3 p {
+#welcomeMessage p {
   pointer-events: none; /* Prevents cursor from changing to caret over text */
   display: inline-block;
   vertical-align: top;
@@ -350,7 +350,7 @@ body {
   bottom: 6%;
 }
 
-#intro3 div {
+#welcomeMessage div {
   top: 100%;
   left: 0%;
   width: 4.935%;
@@ -359,7 +359,7 @@ body {
   overflow:hidden;
 }
 
-#intro3 div:before {
+#welcomeMessage div:before {
   content:'';
   position:absolute;
   top:0; left:0;
@@ -375,7 +375,7 @@ body {
   transform: rotate(-45deg);
 }
 
-#intro3.hidden {
+#welcomeMessage.hidden {
   opacity: 0;
   visibility: hidden;
 }
