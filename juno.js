@@ -1,15 +1,31 @@
 window.onload = function() {
 
-// Scale font relative to document body width
-function scaleFont() {
-  document.body.setScaledFont = function(font) {
-    var scale = this.offsetWidth, fontScale = scale * font;
-    this.style.fontSize = fontScale + '%';
-    return this;
+// Scale game container and text relative to window size
+// Adapted from http://www.html5rocks.com/en/tutorials/casestudies/gopherwoord-studios-resizing-html5-games/
+function scaleGame() {
+  var container = document.getElementById("container");
+  container.setScale = function() {
+    var widthToHeight = 10 / 5.266;
+    var newWidth = window.innerWidth;
+    var newHeight = window.innerHeight;
+    var newWidthToHeight = newWidth / newHeight;
+    if(newWidthToHeight > widthToHeight) {
+      newWidth = newHeight * widthToHeight;
+      this.style.height = newHeight + "px";
+      this.style.width = newWidth + "px";
+    }
+    else {
+      newHeight = newWidth / widthToHeight;
+      this.style.width = newWidth + "px";
+      this.style.height = newHeight + "px";
+    }
+    this.style.marginTop = (-newHeight / 2) + "px";
+    this.style.marginLeft = (-newWidth / 2) + "px";
+    document.body.style.fontSize = (newWidth * 0.14) + '%';
   };
-  document.body.setScaledFont(0.14);
+  container.setScale();
   window.onresize = function() {
-    document.body.setScaledFont(0.14);
+    container.setScale();
   };
 }
 
@@ -84,7 +100,8 @@ function startGame() {
   makeCards();
 }
 
-//  Fisher–Yates shuffle method; adapted from http://bost.ocks.org/mike/shuffle/
+//  Fisher–Yates shuffle method
+//  Adapted from http://bost.ocks.org/mike/shuffle/
 function shuffleDeck(deck, deckRound) {
   // Shuffle deck
   var i = deck.length;
@@ -125,7 +142,7 @@ function dealCards(deck, deckRound) {
   showCards(1, "discardPile", discardPile);
   // Show welcome message
   setTimeout(function() {
-    document.getElementById("welcomeMessage").removeAttribute("class", "hidden");
+    document.getElementById("welcomeMessage").removeAttribute("class", "hide");
   }, 500); // Pause before showing welcome message
   // Start player turn
   playerTurn(playerHand, discardPile, computerHand, deck, deckRound);
@@ -135,7 +152,7 @@ function dealCards(deck, deckRound) {
 
 function initPlayerTurn(discardPile, playerHand, computerHand, deck, deckRound) {
   // Add class to computer's face indicating start of player's turn
-  document.getElementById("computerFace").setAttribute("class", "hide");
+  document.getElementById("computerFace").setAttribute("class", "mute");
   // Excute block if skip card has been played on player
   if(discardPile[0].type === "Skip" && !(document.getElementById("discardPile").firstChild.classList.contains("disabled"))) {
     // Disable skip card to prevent it from taking effect more than once
@@ -161,7 +178,7 @@ function initPlayerTurn(discardPile, playerHand, computerHand, deck, deckRound) 
     // Enable player's cards and buttons
     document.getElementById("playerHand").removeAttribute("class", "disabled");
     document.getElementById("drawButton").removeAttribute("class", "disabled");
-    document.getElementById("playerFace").removeAttribute("class", "hide");
+    document.getElementById("playerFace").removeAttribute("class", "mute");
   }
   // Update player's face
   updateFace("player", playerHand);
@@ -172,8 +189,8 @@ function playerTurn(playerHand, discardPile, computerHand, deck, deckRound) {
   hoverCard(playerHand);
   document.addEventListener("click", function(event) {
     // Hide welcome message when card or draw button is clicked
-    if(!(document.getElementById("welcomeMessage").classList.contains("hidden")) && (event.target.parentNode.id === "playerHand" || event.target.innerHTML === "draw")) {
-      document.getElementById("welcomeMessage").setAttribute("class", "hidden");
+    if(!(document.getElementById("welcomeMessage").classList.contains("hide")) && (event.target.parentNode.id === "playerHand" || event.target.innerHTML === "draw")) {
+      document.getElementById("welcomeMessage").setAttribute("class", "hide");
     }
     // Check which cards in player's hand are playable
     var playableCards = findPlayableCards(playerHand, discardPile);
@@ -183,7 +200,7 @@ function playerTurn(playerHand, discardPile, computerHand, deck, deckRound) {
     }
     // Execute block if player clicks draw button when drawing is allowed
     else if(event.target.innerHTML === "draw" && event.target.className !== "disabled") {
-      playerDrawCard(deck, deckRound, discardPile, playerHand);
+      playerDrawCard(deck, deckRound, discardPile, playerHand, event);
     }
     // Execute block if player clicks pass button when passing is allowed
     else if(event.target.innerHTML === "pass" && document.getElementById("drawButton").className === "disabled" && event.target.className !== "disabled") {
@@ -216,7 +233,7 @@ function playerClickCard(event, playableCards, playerHand, discardPile, computer
   }
 }
 
-function playerDrawCard(deck, deckRound, discardPile, playerHand) {
+function playerDrawCard(deck, deckRound, discardPile, playerHand, event) {
   // Add card to player's hand
   drawCards(1, deck, deckRound, discardPile, playerHand, "playerHand");
   // Update player's face
@@ -246,11 +263,11 @@ function playerPlayCard(event, clickedCardClass, playerHand, clickedCard, discar
   // Get position of discard pile
   var discardPileRect = document.getElementById("discardPile").firstChild.getBoundingClientRect();
   // Add rule to stylesheet and class to card to animate movement of card from hand to discard pile
-  document.styleSheets[2].insertRule(".playCard { -webkit-transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); -moz-transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); -ms-transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); }", 0);
+  document.styleSheets[0].insertRule(".playCard { -webkit-transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); -moz-transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); -ms-transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); transform: translate(" + (discardPileRect.left - clickedCardRect.left) + "px, " + (discardPileRect.top - clickedCardRect.top) + "px); }", 0);
   event.target.setAttribute("class", clickedCardClass + " playCard");
   setTimeout(function() {
     // Remove rule from stylesheet
-    document.styleSheets[2].deleteRule(0);
+    document.styleSheets[0].deleteRule(0);
     // Update arrays and DOM after card has been played
     playCleanup(playerHand, clickedCard, "playerHand", discardPile);
     // Update player's face
@@ -273,7 +290,7 @@ function playerPlayCard(event, clickedCardClass, playerHand, clickedCard, discar
   }, 300); // Pause for card play animation
 }
 
-// I went with mouseover/mouseout instead of :hover because I preferred their behavior in some browsers.
+// I used mouseover/mouseout instead of :hover because I preferred their behavior in some browsers.
 // Unlike :hover, they don't cause the effect unless the mouse is actively moved over an element.
 function hoverCard(playerHand) {
   var oldCardStyle = "";
@@ -333,9 +350,9 @@ function computerTurn(discardPile, computerHand, playerHand, deck, deckRound) {
   }
   else {
     // Add class to player's face indicating start of computer's turn
-    document.getElementById("playerFace").setAttribute("class", "hide");
+    document.getElementById("playerFace").setAttribute("class", "mute");
     // Remove class from computer's face indicating start of computer's turn
-    document.getElementById("computerFace").removeAttribute("class", "hide");
+    document.getElementById("computerFace").removeAttribute("class", "mute");
     // Check which cards in computer's hand are playable
     var playableCards = findPlayableCards(computerHand, discardPile);
     // Excute block if draw two card has been played on computer
@@ -406,7 +423,7 @@ function computerPlayCard(playableCards, computerHand, discardPile, playerHand, 
     // Get position of discard pile
     var discardPileRect = document.getElementById("discardPile").firstChild.getBoundingClientRect();
     // Add rule to stylesheet and class to card to animate movement of card from hand to discard pile
-    document.styleSheets[2].insertRule(".playCard { -webkit-transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); -moz-transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); -ms-transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); }", 0);
+    document.styleSheets[0].insertRule(".playCard { -webkit-transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); -moz-transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); -ms-transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); transform: translate(" + (discardPileRect.left - chosenCardRect.left) + "px, " + (discardPileRect.top - chosenCardRect.top) + "px); }", 0);
     var chosenCardClass = document.getElementById(chosenCard.id).getAttribute("class");
     document.getElementById(chosenCard.id).setAttribute("class", chosenCardClass + " playCard");
     // Execute block if computer has fewer than eight cards
@@ -416,7 +433,7 @@ function computerPlayCard(playableCards, computerHand, discardPile, playerHand, 
     }
     setTimeout(function() {
       // Remove rule from stylesheet
-      document.styleSheets[2].deleteRule(0);
+      document.styleSheets[0].deleteRule(0);
       // Update arrays and DOM after card has been played
       playCleanup(computerHand, chosenCard, "computerHand", discardPile);
       // Update computer's face
@@ -494,7 +511,7 @@ function showCards(numberOfCards, id, cards) {
       // Execute block if card text is a number
       if(typeof cards[i].type === "number") {
         // Set style to adjust font size and placement of number
-        cardDiv.firstChild.setAttribute("style", "font-size: 170%; margin-top: 39.5%");
+        cardDiv.firstChild.setAttribute("style", "font-size: 210%; margin-top: 40.8%");
       }
     }
   }
@@ -557,12 +574,12 @@ function playWild(whoPlayed, computerHand, playerHand, discardPile, deck, deckRo
   // Execute block if player played wild
   if(whoPlayed === "player") {
     // Show wild card menu
-    document.getElementById("wildMenu").removeAttribute("class", "hidden");
+    document.getElementById("wildMenu").removeAttribute("class", "hide");
     document.getElementById("wildMenu").onclick = function(event) {
       // Execute block if menu button is clicked
-      if(event.target.parentNode.id === "wildMenu" && event.target.tagName === "BUTTON") {
+      if(event.target.parentNode.id === "wildMenu" && event.target.classList.contains("button")) {
         // Hide wild card menu
-        document.getElementById("wildMenu").setAttribute("class", "hidden");
+        document.getElementById("wildMenu").setAttribute("class", "hide");
         // Set wild card color equal to id of clicked button
         document.getElementById("discardPile").firstChild.setAttribute("class", "card " + event.target.id);
         discardPile[0].color = event.target.id;
@@ -640,7 +657,7 @@ function gameOver(winner) {
   // Create placeholder div to maintain height of container for player or computer's hand after all cards have been played
   var placeholderDiv = document.createElement("div");
   // Set class for placeholder div
-  placeholderDiv.setAttribute("class", "placeholder");
+  placeholderDiv.setAttribute("id", "placeholder");
   // Execute block if player is the winner
   if(winner === "player") {
     // Append placeholder div to playerHand div
@@ -661,9 +678,9 @@ function gameOver(winner) {
   }
   setTimeout(function() {
     //Show gray screen overlay
-    document.getElementById("overlay").removeAttribute("class", "hidden");
+    document.getElementById("overlay").removeAttribute("class", "hide");
     // Show game over screen
-    document.getElementById("gameOver").removeAttribute("class", "hidden");
+    document.getElementById("gameOver").removeAttribute("class", "hide");
   }, 1000); // Pause before showing overlay
   document.querySelector("body").addEventListener("click", function(event) {
     // Execute block if player clicks button to play again
@@ -673,9 +690,9 @@ function gameOver(winner) {
     // Execute block if player clicks button not to play again
     else if(event.target.classList.contains("play") && event.target.innerHTML === "no") {
       // Hide game over screen
-      document.getElementById("gameOver").setAttribute("class", "hidden");
+      document.getElementById("gameOver").setAttribute("class", "hide");
       // Hide gray screen overlay
-      document.getElementById("overlay").setAttribute("class", "hidden");
+      document.getElementById("overlay").setAttribute("class", "hide");
     }
   });
 }
@@ -700,7 +717,7 @@ function checkDeck(deck, deckRound, discardPile) {
   }
 }
 
-scaleFont();
+scaleGame();
 startGame();
 
 };

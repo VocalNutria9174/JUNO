@@ -2,59 +2,59 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>JUNO</title>
-		<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
-		<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<script type="text/javascript" src="juno.js"></script>
 	</head>
 	<body>
-		<div id="contain">
-			<section id="computerHead">
-				<div id="computerFace" class="hide">
-					<img src="./images/computerFace2.png" alt="computer face">
-				</div>
-			</section>
-			<section id="computerWrapper">
-				<div id="computerHand"></div>
-			</section>
-			<section id="discardWrapper">
-				<div id="welcomeMessage" class="hidden">
-					<p>It's your turn! Click on a card to play.<br>If you can't play, draw.</p>
-					<div></div>
-				</div>
-				<div id="wildMenu" class="hidden">
-					<p>choose a color</p>
-					<div class="triangle"></div>
-					<button class="wildMenu" id="Red"></button>
-					<button class="wildMenu" id="Green"></button>
-					<button class="wildMenu" id="Blue"></button>
-					<button class="wildMenu" id="Yellow"></button>
-				</div>
-				<div id="gameOver" class="hidden">
-					<div id="message"></div>
-					<img>
-					<div class="container">Play again?
-						<div class="play">yes</div>
-						<div class="play">no</div>
+		<div id="container">
+			<div id="gameContainer">
+				<div id="computerContainer">
+					<div id="computerHead">
+						<div id="computerFace" class="mute">
+							<img src="./images/computerFace2.png" alt="computer face">
+						</div>
 					</div>
+					<div id="computerHand"></div>
 				</div>
-				<div id="discardPile"></div>
-			</section>
-			<section id="playerHead">
-				<div id="playerFace">
-					<img src="./images/playerFace3.png" alt="player face">
+				<div id="discardPileContainer">
+					<div id="welcomeMessage" class="hide">
+						<div>It's your turn! Click on a card to play.<br>If you can't play, draw.</div>
+						<div id="triangleDown"></div>
+					</div>
+					<div id="wildMenu" class="hide">
+						<div id="triangleLeft"></div>
+						<div>choose a color</div>
+						<div class="button" id="Red"></div>
+						<div class="button" id="Green"></div>
+						<div class="button" id="Blue"></div>
+						<div class="button" id="Yellow"></div>
+					</div>
+					<div id="gameOver" class="hide">
+						<div id="message"></div>
+						<img>
+						<div class="container">Play again?
+							<div class="play">yes</div>
+							<div class="play">no</div>
+						</div>
+					</div>
+					<div id="discardPile"></div>
 				</div>
-			</section>
-			<section id="playerWrapper">
-				<div id="sidebar">
-					<div id="drawButton">draw</div>
-					<div id="passButton" class="disabled">pass</div>
+				<div id="playerContainer">
+					<div id="playerHead">
+						<div id="playerFace">
+							<img src="./images/playerFace3.png" alt="player face">
+						</div>
+					</div>
+						<!--<div id="sidebar">
+							<div id="drawButton">draw</div>
+							<div id="passButton" class="disabled">pass</div>
+						</div>-->
+					<div id="playerHand"></div>
 				</div>
-				<div id="playerHand"></div>
-			</section>
-			<div id="overlay" class="hidden"></div>
+				<div id="overlay" class="hide"></div>
+			</div>
 		</div>
 	</body>
 </html>

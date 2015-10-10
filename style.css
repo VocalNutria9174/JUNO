@@ -1,125 +1,480 @@
 @font-face {
-  font-family: "FARRAY";
-  src: url('./fonts/farray-webfont.woff2') format('woff2'),
-       url('./fonts/farray-webfont.woff') format('woff');
+  font-family: "Farray";
+  src: url("./fonts/farray-webfont.woff2") format("woff2"),
+       url("./fonts/farray-webfont.woff") format("woff");
 }
 
 @font-face {
-  font-family: "montserrat-light";
-  src: url('./fonts/montserrat-light-webfont.woff2') format('woff2'),
-       url('./fonts/montserrat-light-webfont.woff') format('woff');
+  font-family: "Montserrat-Light";
+  src: url("./fonts/montserrat-light-webfont.woff2") format("woff2"),
+       url("./fonts/montserrat-light-webfont.woff") format("woff");
 }
 
 * {
-  border: 0px blue dashed;
-  -webkit-user-select: none; /* Prevents highlighting on double-click */
-  -moz-user-select: none; /* Prevents highlighting on double-click */
-  -ms-user-select: none; /* Prevents highlighting on double-click */
-  user-select: none; /* Prevents highlighting on double-click */
-  cursor:default;
+  border: 0px dashed blue;
 }
 
 body {
   background-color: #EEEEEE;
-  font-family: "FARRAY";
-  margin-top: 0%;
+  -webkit-user-select: none; /* Prevent highlight on double-click */
+  -moz-user-select: none; /* Prevent highlight on double-click */
+  -ms-user-select: none; /* Prevent highlight on double-click */
+  user-select: none; /* Prevent highlight on double-click */
+  cursor: default; /* Prevent cursor from changing shape */
 }
 
-#contain {
-  overflow-x: hidden; /* Prevents horizontal scrollbar from appearing */
+#container {
+  top: 50%;
+  left: 50%;
+  position: absolute;
 }
 
-#computerWrapper {
-  width: 65%;
+#gameContainer {
+  width: 70%;
   margin: auto;
-  display: table;
-  background-color: #FFFFFF;
-  padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 2.5%;
+  padding-left: 5%;
+  border-top: 1px solid #E0E0E0;
   border-right: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E0E0E0;
   border-left: 1px solid #E0E0E0;
+  background-color: #FFFFFF;
+  overflow-x: hidden;
+}
+
+/* Computer section */
+
+#computerContainer {
+  width: 100%;
+}
+
+#computerFace { /* Force image contained by div to resize relative to div */
+  width: 11.15%;
+  padding-top: 1.5%;
+  padding-bottom: 0.85%;
+  padding-left: 1.55%;
+  opacity: 1;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  transition: opacity 0.4s;
   position: relative;
+}
+
+#computerFace.mute {
+  opacity: 0.5;
 }
 
 #computerHand {
-  white-space: nowrap; /* Prevents cards from breaking to new line */
-  border-radius: 0.3em;
+  -webkit-border-radius: 0.3em; /* Border radius for cards to inherit */
+  -moz-border-radius: 0.3em; /* Border radius for cards to inherit */
+  border-radius: 0.3em; /* Border radius for cards to inherit */
+  white-space: nowrap; /* Prevent cards from breaking to new line */
 }
 
-#discardWrapper {
-  margin: auto;
-  width: 65%;
-  display: table;
-  background-color: #FFFFFF;
-  padding-left: 5%;
-  padding-right: 5%;
-  border-right: 1px solid #E0E0E0;
-  border-left: 1px solid #E0E0E0;
-  position: relative;
+/* Discard section */
+
+#discardPileContainer {
+  width: 100%;
   padding-top: 1.5%;
-}
-
-#playerWrapper {
-  width: 70%;
-  margin: auto;
-  display: table;
-  background-color: #FFFFFF;
-  padding-bottom: 1.9%;
-  border-left: 1px solid #E0E0E0;
-  border-right: 1px solid #E0E0E0;
-  border-bottom: 1px solid #E0E0E0;
-  padding-right: 5%;
   position: relative;
 }
 
-#computerHead {
-  font-size: 40%;
-  font-family: "Josefin Sans";
-  margin: auto;
-  display: table;
-  color: #005780;
-  background-color: #FFFFFF;
-  padding: 0%;
-  border-left: 1px solid #E0E0E0;
-  border-right: 1px solid #E0E0E0;
-  padding-top: 3%;
-  padding-bottom: 0.6%;
-  width: 65%;
-  padding-left: 5%;
-  padding-right: 5%;
-  position: relative;
+#discardPile {
+  -webkit-border-radius: 0.3em; /* Border radius for cards to inherit */
+  -moz-border-radius: 0.3em; /* Border radius for cards to inherit */
+  border-radius: 0.3em; /* Border radius for cards to inherit */
 }
 
-#computerHead div {
-  position: relative;
-  left: 8%;
-  top: 12%;
-  width: 9.7%;
+/* Welcome message */
+
+#welcomeMessage {
+  width: 26.6%;
+  height: 29.2%;
+  top: 46.5%;
+  left: 5.5%;
+  padding-left: 2.4%;
+  background-color: #005780;
+  font-family: "Montserrat-Light";
+  font-size: 43%;
+  line-height: 160%;
+  visibility: visible;
+  opacity: 1;
+  webkit-transition: opacity 0.25s, visibility 0.25s;
+  -moz-transition: opacity 0.25s, visibility 0.25s;
+  -ms-transition: opacity 0.25s, visibility 0.25s;
+  -o-transition: opacity 0.25s, visibility 0.25s;
+  transition: opacity 0.25s, visibility 0.25s;
   position: absolute;
-  transition: 0.4s;
+  display: inline-block;
 }
 
-.card {
-  line-height: 100%;
-  width: 12.8%;
-  margin-left: 0.74%;
-  margin-right: 0.74%;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: inherit;
-  text-align: center;
+#welcomeMessage.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#welcomeMessage div:first-child {
+  padding-top: 3.3%;
+  color: #FFFFFF;
   display: inline-block;
+}
+
+#triangleDown {
+  width: 5.64%;
+  top: 100%;
+  left: 0%;
+  padding-bottom: 4%; /* Width / 1.41 */
+  overflow: hidden;
+  position: absolute;
+}
+
+#triangleDown:before {
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  content: "";
+  background-color: #005780;
+  -webkit-transform-origin: left bottom;
+  -moz-transform-origin: left bottom;
+  -ms-transform-origin: left bottom;
+  -o-transform-origin: left bottom;
+  transform-origin: left bottom;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  position: absolute;
+}
+
+/* Wild menu */
+
+#wildMenu {
+  width: 29.3%;
+  height: 18%;
+  top: 40%;
+  left: 59%;
+  padding-top: 1%;
+  padding-left: 2.4%;
+  background-color: #005780;
+  font-family: "Montserrat-Light";
+  font-size: 43%;
+  visibility: visible;
+  opacity: 1;
+  webkit-transition: opacity 0.25s, visibility 0.25s;
+  -moz-transition: opacity 0.25s, visibility 0.25s;
+  -ms-transition: opacity 0.25s, visibility 0.25s;
+  -o-transition: opacity 0.25s, visibility 0.25s;
+  transition: opacity 0.25s, visibility 0.25s;
+  position: absolute;
+  display: inline-block;
+}
+
+#wildMenu.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#triangleLeft {
+  width: 5.64%;
+  top: 0%;
+  left: -5.64%;
+  padding-bottom: 4%; /*Width / 1.41 */
+  overflow: hidden;
+  position: absolute;
+}
+
+#triangleLeft:before{
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  content: "";
+  background-color: #005780;
+  -webkit-transform-origin: right bottom;
+  -moz-transform-origin: right bottom;
+  -ms-transform-origin: right bottom;
+  -o-transform-origin: right bottom;
+  transform-origin: right bottom;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+}
+
+#wildMenu div:nth-child(2) {
+  top: -26%;
   color: #FFFFFF;
   position: relative;
-  white-space: normal; /* Cause card text to wrap */
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4);
-  box-shadow: 0 1px 2px rgba(0,0,0,.4);
-  -webkit-transition: bottom 0.10s ease-in-out;
-  -moz-transition: bottom 0.10s ease-in-out;
-  transition: bottom 0.10s ease-in-out;
-  bottom: 0px;
+  display: inline-block;
 }
+
+#Red {
+  width: 10%;
+  height: 75%;
+  margin-left: 3%;
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  opacity: 0.5;
+  background: -webkit-radial-gradient(#FF1744, #F21642);
+  background: -moz-radial-gradient(#FF1744, #F21642);
+  background: -o-radial-gradient(#FF1744, #F21642);
+  background: radial-gradient(#FF1744, #F21642);
+  display: inline-block;
+}
+
+#Red:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+  webkit-transition: opacity 0.15s, -webkit-transform 0.15s;
+  -moz-transition: opacity 0.15s, -moz-transform 0.15s;
+  -ms-transition: opacity 0.15s, -ms-transform 0.15s;
+  -o-transition: opacity 0.15s, -o-transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+#Green {
+  width: 10%;
+  height: 75%;
+  margin-left: 3.5%;
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  opacity: 0.5;
+  background: -webkit-radial-gradient(#00E676, #00D970);
+  background: -moz-radial-gradient(#00E676, #00D970);
+  background: -o-radial-gradient(#00E676, #00D970);
+  background: radial-gradient(#00E676, #00D970);
+  display: inline-block;
+}
+
+#Green:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+  webkit-transition: opacity 0.15s, -webkit-transform 0.15s;
+  -moz-transition: opacity 0.15s, -moz-transform 0.15s;
+  -ms-transition: opacity 0.15s, -ms-transform 0.15s;
+  -o-transition: opacity 0.15s, -o-transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+#Blue {
+  width: 10%;
+  height: 75%;
+  margin-left: 3.5%;
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  opacity: 0.5;
+  background: -webkit-radial-gradient(#00B0FF, #00A6F2);
+  background: -moz-radial-gradient(#00B0FF, #00A6F2);
+  background: -o-radial-gradient(#00B0FF, #00A6F2);
+  background: radial-gradient(#00B0FF, #00A6F2);
+  display: inline-block;
+}
+
+#Blue:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+  webkit-transition: opacity 0.15s, -webkit-transform 0.15s;
+  -moz-transition: opacity 0.15s, -moz-transform 0.15s;
+  -ms-transition: opacity 0.15s, -ms-transform 0.15s;
+  -o-transition: opacity 0.15s, -o-transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+#Yellow {
+  width: 10%;
+  height: 75%;
+  margin-left: 3.5%;
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  opacity: 0.5;
+  background: -webkit-radial-gradient(#FFEA00, #F2DE00);
+  background: -moz-radial-gradient(#FFEA00, #F2DE00);
+  background: -o-radial-gradient(#FFEA00, #F2DE00);
+  background: radial-gradient(#FFEA00, #F2DE00);
+  display: inline-block;
+}
+
+#Yellow:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.1, 1.1);
+  -moz-transform: scale(1.1, 1.1);
+  -ms-transform: scale(1.1, 1.1);
+  -o-transform: scale(1.1, 1.1);
+  transform: scale(1.1, 1.1);
+  webkit-transition: opacity 0.15s, -webkit-transform 0.15s;
+  -moz-transition: opacity 0.15s, -moz-transform 0.15s;
+  -ms-transition: opacity 0.15s, -ms-transform 0.15s;
+  -o-transition: opacity 0.15s, -o-transform 0.15s;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+/* Player section */
+
+#playerContainer {
+  width: 100%;
+}
+
+#playerHead {
+  padding-top: 1.45%;
+  position: relative;
+}
+
+#playerFace { /* Force image contained by div to resize relative to div */
+  width: 11.15%;
+  top: -210%;
+  padding-left: 1.55%;
+  opacity: 1;
+  -webkit-transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  -o-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  position: absolute;
+}
+
+#playerFace.mute {
+  opacity: 0.5;
+}
+
+#playerHand {
+  -webkit-border-radius: 0.3em; /* Border radius for cards to inherit */
+  -moz-border-radius: 0.3em; /* Border radius for cards to inherit */
+  border-radius: 0.3em; /* Border radius for cards to inherit */
+  white-space: nowrap; /* Prevent cards from breaking to new line */
+}
+
+/* Cards */
+
+.card {
+  width: 12.8%;
+  bottom: 0px;
+  margin-right: 0.74%;
+  margin-left: 0.74%;
+  border-radius: inherit;
+  color: #FFFFFF;
+  font-family: "Farray";
+  font-size: 95%;
+  text-align: center;
+  line-height: 120%;
+  white-space: normal; /* Force card text to wrap */
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  -webkit-transition: bottom 0.1s;
+  -moz-transition: bottom 0.1s;
+  -o-transition: bottom 0.1s;
+  transition: bottom 0.1s;
+  position: relative;
+  display: inline-block;
+}
+
+.card:before { /* Set card height relative to width */
+  padding-top: 148%;
+  content: "";
+  display: block;
+}
+
+#computerHand .card {
+  background: -webkit-linear-gradient(#404040, #000000);
+  background: -moz-linear-gradient(#404040, #000000);
+  background: -o-linear-gradient(#404040, #000000);
+  background: linear-gradient(#404040, #000000);
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4), -1px -1px #595959;
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4), -1px -1px #595959;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4), -1px -1px #595959;
+}
+
+#computerHand .cardText {
+  color: #FFFFFF;
+}
+
+#discardPile .card {
+  margin-left: 43.58%;
+}
+
+.Red {
+  background: -webkit-linear-gradient(#FF1744, #F21642);
+  background: -moz-linear-gradient(#FF1744, #F21642);
+  background: -o-linear-gradient(#FF1744, #F21642);
+  background: linear-gradient(#FF1744, #F21642);
+}
+
+.Green {
+  color: #000000;
+  background: -webkit-linear-gradient(#00E676, #00D970);
+  background: -moz-linear-gradient(#00E676, #00D970);
+  background: -o-linear-gradient(#00E676, #00D970);
+  background: linear-gradient(#00E676, #00D970);
+}
+
+.Blue {
+  background: -webkit-linear-gradient(#00B0FF, #00A6F2);
+  background: -moz-linear-gradient(#00B0FF, #00A6F2);
+  background: -o-linear-gradient(#00B0FF, #00A6F2);
+  background: linear-gradient(#00B0FF, #00A6F2);
+}
+
+.Yellow {
+  color: #000000;
+  background: -webkit-linear-gradient(#FFEA00, #F2DE00);
+  background: -moz-linear-gradient(#FFEA00, #F2DE00);
+  background: -o-linear-gradient(#FFEA00, #F2DE00);
+  background: linear-gradient(#FFEA00, #F2DE00);
+}
+
+.Wild {
+  background: -webkit-linear-gradient(#404040, #000000);
+  background: -moz-linear-gradient(#404040, #000000);
+  background: -o-linear-gradient(#404040, #000000);
+  background: linear-gradient(#404040, #000000);
+}
+
+.cardText {
+  top: 0;
+  right: 0;
+  left: 0;
+  margin-top: 29%;
+  opacity: 0.70;
+  pointer-events: none;
+  position: absolute;
+}
+
+#placeholder {
+  width: 12.8%;
+  margin-right: 0.74%;
+  margin-left: 0.74%;
+  display: inline-block;
+}
+
+#placeholder:before { /* Set card height relative to width */
+  padding-top: 148%;
+  content: "";
+  display: block;
+}
+
+
+
 
 .playCard {
   -webkit-transition: -webkit-transform 0.30s ease-in-out;
@@ -127,117 +482,6 @@ body {
   transition: -ms-transform 0.30s ease-in-out;
   transition: transform 0.30s ease-in-out;
   opacity: 0.5;
-}
-
-#discardPile .card {
-  margin-left: 43.58%;
-  border-radius: inherit;
-}
-
-#discardPile {
-  border-radius: 0.3em;
-}
-
-.card:before { /* Sets card height relative to width */
-  content: "";
-  display: block;
-  padding-top: 148%;
-}
-
-.placeholder {
-  width: 12.8%;
-  margin-left: 0.74%;
-  margin-right: 0.74%;
-  display: inline-block;
-}
-
-.placeholder:before { /* Sets card height relative to width */
-  content: "";
-  display: block;
-  padding-top: 148%;
-}
-
-.Blue {
-  background: rgba(0,176,255,1);
-  background: -moz-linear-gradient(top, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,176,255,1)), color-stop(100%, rgba(0,166,242,1)));
-  background: -webkit-linear-gradient(top, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: -o-linear-gradient(top, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: -ms-linear-gradient(top, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: linear-gradient(to bottom, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b0ff', endColorstr='#00a6f2', GradientType=0 );*/
-}
-
-.Green {
-  color: #000000;
-  background: rgba(0,230,118,1);
-  background: -moz-linear-gradient(top, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(0,230,118,1)), color-stop(100%, rgba(0,217,112,1)));
-  background: -webkit-linear-gradient(top, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: -o-linear-gradient(top, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: -ms-linear-gradient(top, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: linear-gradient(to bottom, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e676', endColorstr='#00d970', GradientType=0 );*/
-}
-
-.Red {
-  background: rgba(255,23,68,1);
-  background: -moz-linear-gradient(top, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,23,68,1)), color-stop(100%, rgba(242,22,66,1)));
-  background: -webkit-linear-gradient(top, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: -o-linear-gradient(top, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: -ms-linear-gradient(top, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: linear-gradient(to bottom, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff1744', endColorstr='#f21642', GradientType=0 );*/
-}
-
-.Yellow {
-  color: #000000;
-  background: rgba(255,234,0,1);
-  background: -moz-linear-gradient(top, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,234,0,1)), color-stop(100%, rgba(242,222,0,1)));
-  background: -webkit-linear-gradient(top, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: -o-linear-gradient(top, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: -ms-linear-gradient(top, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: linear-gradient(to bottom, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffea00', endColorstr='#f2de00', GradientType=0 );*/
-}
-
-.Wild {
-  background: rgba(64,64,64,1);
-  background: -moz-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(64,64,64,1)), color-stop(100%, rgba(0,0,0,1)));
-  background: -webkit-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: -o-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: -ms-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
-  box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#404040', endColorstr='#000000', GradientType=0 );*/
-}
-
-.cardText {
-  pointer-events: none; /* Prevents cursor from changing to caret over text */
-  position: absolute;
-  margin-top: 29%;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  opacity: 0.70;
-  font-size: 85%;
-}
-
-#computerHand .cardText {
-  color: #FFFFFF;
-}
-
-#playerHand {
-  width: 65%;
-  white-space: nowrap; /* Prevents cards from breaking to new line */
-  display: table-cell;
-  border-radius: 0.3em;
 }
 
 #sidebar {
@@ -249,25 +493,11 @@ body {
   padding-left: 1.7%;
 }
 
-#computerHand .card {
-  background: rgba(64,64,64,1);
-  background: -moz-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(64,64,64,1)), color-stop(100%, rgba(0,0,0,1)));
-  background: -webkit-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: -o-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: -ms-linear-gradient(top, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  background: linear-gradient(to bottom, rgba(64,64,64,1) 0%, rgba(0,0,0,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#404040', endColorstr='#000000', GradientType=0 );*/
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
-  box-shadow: 0 1px 2px rgba(0,0,0,.4), -1px -1px 0 #595959;
-}
-
 #sidebar div {
   cursor:default;
   position: relative;
   font-size: 40%;
-  font-family: "montserrat-light";
+  font-family: "Montserrat-Light";
   text-align: center;
   padding-top: 12%;
   padding-bottom: 15%;
@@ -298,277 +528,6 @@ body {
   outline: 0;
 } /* Disables highlighting on focus */
 
-#wildMenu {
-  line-height: 140%;
-  font-size: 40%;
-  font-family: "montserrat-light";
-  padding-left: 2.4%;
-  z-index: 2;
-  width: 27%;
-  height: 20%;
-  top: 40%;
-  left: 58%;
-  position: absolute;
-  display: inline-block;
-  color: #FFFFFF;
-  background-color: #005780;
-}
-
-#wildMenu p {
-  pointer-events: none; /* Prevents cursor from changing to caret over text */
-  display: inline-block;
-  position: relative;
-}
-
-#welcomeMessage {
-  font-size: 40%;
-  font-family: "montserrat-light";
-  padding-left: 2.4%;
-  line-height: 160%;
-  z-index: 2;
-  width: 23%;
-  height: 28.5%;
-  top: 51%;
-  left: 11.5%;
-  position: absolute;
-  display: inline-block;
-  color: #FFFFFF;
-  background-color: #005780;
-  webkit-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  -moz-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  -ms-transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
-  opacity: 1;
-  visibility: visible;
-}
-
-#welcomeMessage p {
-  pointer-events: none; /* Prevents cursor from changing to caret over text */
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  bottom: 6%;
-}
-
-#welcomeMessage div {
-  top: 100%;
-  left: 0%;
-  width: 4.935%;
-  padding-bottom:3.5%;
-  position:absolute;
-  overflow:hidden;
-}
-
-#welcomeMessage div:before {
-  content:'';
-  position:absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background-color : #005780;
-  -webkit-transform-origin: left bottom;
-  -moz-transform-origin: left bottom;
-  -moz-transform-origin: left bottom;
-  transform-origin: left bottom;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-
-#welcomeMessage.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
-#wildMenu p {
-  pointer-events: none; /* Prevents cursor from changing to caret over text */
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  bottom: 4%;
-}
-
-#wildMenu button:focus {
-  outline: 0;
-} /* Disables highlighting on focus */
-
-.triangle {
-  top: 0%;
-  left: -4.1%;
-  width: 4.23%;
-  padding-bottom: 3%;
-  position: absolute;
-  overflow: hidden;
-}
-
-.triangle:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color : #005780;
-  -webkit-transform-origin: right bottom;
-  -moz-transform-origin: right bottom;
-  -moz-transform-origin: right bottom;
-  transform-origin: right bottom;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-#wildMenu #Red {
-  width: 10.5%;
-  opacity: 0.5;
-  height: 63%;
-  position: relative;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
-  margin-left: 3.3%;
-  margin-top: 2.7%;
-  display: inline;
-  color: #000000;
-  background: rgba(255,23,68,1);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,23,68,1)), color-stop(100%, rgba(242,22,66,1)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  background: radial-gradient(ellipse at center, rgba(255,23,68,1) 0%, rgba(242,22,66,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff1744', endColorstr='#f21642', GradientType=1 );*/
-}
-
-#wildMenu #Red:hover {
-  opacity: 1;
-  webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  -webkit-transform: scale(1.1, 1.1);
-  -moz-transform: scale(1.1, 1.1);
-  -ms-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
-
-#wildMenu #Green {
-  width: 10.5%;
-  opacity: 0.5;
-  height: 63%;
-  position: relative;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
-  margin-left: 3.3%;
-  margin-top: 2.7%;
-  display: inline;
-  color: #000000;
-  background: rgba(0,230,118,1);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,230,118,1)), color-stop(100%, rgba(0,217,112,1)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  background: radial-gradient(ellipse at center, rgba(0,230,118,1) 0%, rgba(0,217,112,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e676', endColorstr='#00d970', GradientType=1 );*/
-}
-
-#wildMenu #Green:hover {
-  opacity: 1;
-  webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  -webkit-transform: scale(1.1, 1.1);
-  -moz-transform: scale(1.1, 1.1);
-  -ms-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
-
-#wildMenu #Blue {
-  width: 10.5%;
-  opacity: 0.5;
-  height: 63%;
-  position: relative;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
-  margin-left: 3.3%;
-  margin-top: 2.7%;
-  display: inline-block;
-  color: #000000;
-  background: rgba(0,176,255,1);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(0,176,255,1)), color-stop(100%, rgba(0,166,242,1)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  background: radial-gradient(ellipse at center, rgba(0,176,255,1) 0%, rgba(0,166,242,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b0ff', endColorstr='#00a6f2', GradientType=1 );*/
-}
-
-#wildMenu #Blue:hover {
-  opacity: 1;
-  webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  -webkit-transform: scale(1.1, 1.1);
-  -moz-transform: scale(1.1, 1.1);
-  -ms-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
-
-#wildMenu #Yellow {
-  width: 10.5%;
-  opacity: 0.5;
-  height: 63%;
-  position: relative;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
-  margin-left: 3.3%;
-  margin-top: 2.7%;
-  display: inline-block;
-  color: #000000;
-  background: rgba(255,234,0,1);
-  background: -moz-radial-gradient(center, ellipse cover, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,234,0,1)), color-stop(100%, rgba(242,222,0,1)));
-  background: -webkit-radial-gradient(center, ellipse cover, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: -o-radial-gradient(center, ellipse cover, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: -ms-radial-gradient(center, ellipse cover, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  background: radial-gradient(ellipse at center, rgba(255,234,0,1) 0%, rgba(242,222,0,1) 100%);
-  /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffea00', endColorstr='#f2de00', GradientType=1 );*/
-}
-
-#wildMenu #Yellow:hover {
-  opacity: 1;
-  webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  -webkit-transform: scale(1.1, 1.1);
-  -moz-transform: scale(1.1, 1.1);
-  -ms-transform: scale(1.1, 1.1);
-  transform: scale(1.1, 1.1);
-}
-
-#wildMenu {
-  webkit-transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
-  -moz-transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
-  -ms-transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
-  transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
-  opacity: 1;
-  visibility: visible;
-}
-
-#wildMenu.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
 #overlay {
   position: fixed;
   left: 0%;
@@ -584,7 +543,7 @@ body {
   background: rgba(0,0,0,.5);
 }
 
-#overlay.hidden {
+#overlay.hide {
   position: fixed;
   left: 0%;
   top: 0%;
@@ -608,7 +567,7 @@ body {
   border-radius: 0.5em;
   background-color: #FFFFFF;
   font-size: 40%;
-  font-family: "montserrat-light";
+  font-family: "Montserrat-Light";
 }
 
 .container {
@@ -656,7 +615,7 @@ body {
   outline: 0;
 } /* Disables highlighting on focus */
 
-#gameOver.hidden {
+#gameOver.hide {
   visibility: hidden;
 }
 
@@ -669,7 +628,7 @@ body {
   top: 5%;
   color: #ccb104;
   font-size: 150%;
-  font-family: "montserrat-light";
+  font-family: "Montserrat-Light";
 }
 
 .shake {
@@ -756,37 +715,9 @@ body {
   }
 }
 
-#playerHead {
-  width: 65%;
-  margin: auto;
-  display: table;
-  background-color: #FFFFFF;
-  border-left: 1px solid #E0E0E0;
-  border-right: 1px solid #E0E0E0;
-  padding-left: 5%;
-  padding-right: 5%;
-  color: #005780;
-  padding-top: 1.5%;
-  position: relative;
-}
-
-#playerHead div {
-  top: -110%;
-  left: 8%;
-  width: 9.7%;
-  position: absolute;
-  transition: 0.4s;
-}
-
 img {
   max-width: 100%;
   height: auto;
   display: block;
   position: relative;
-  opacity: 1;
-  transform: translateY(0%);
-}
-
-.hide {
-  opacity: 0.5;
 }
