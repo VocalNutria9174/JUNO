@@ -199,12 +199,16 @@ function playerTurn(playerHand, discardPile, computerHand, deck, deckRound) {
       playerClickCard(event, playableCards, playerHand, discardPile, computerHand, deck, deckRound);
     }
     // Execute block if player clicks draw button when drawing is allowed
-    else if(event.target.innerHTML === "draw" && event.target.className !== "disabled") {
+    else if(event.target.id === "drawButton" && event.target.className !== "disabled") {
       playerDrawCard(deck, deckRound, discardPile, playerHand, event);
     }
     // Execute block if player clicks pass button when passing is allowed
-    else if(event.target.innerHTML === "pass" && document.getElementById("drawButton").className === "disabled" && event.target.className !== "disabled") {
+    else if(event.target.id === "passButton" && document.getElementById("drawButton").className === "disabled" && event.target.className !== "disabled") {
       playerPass(computerHand, playerHand, discardPile, deck, deckRound, event);
+    }
+    // Execute block if player clicks info button
+    else if(event.target.id === "infoButton") {
+      showInfo();
     }
   });
 }
@@ -577,7 +581,7 @@ function playWild(whoPlayed, computerHand, playerHand, discardPile, deck, deckRo
     document.getElementById("wildMenu").removeAttribute("class", "hide");
     document.getElementById("wildMenu").onclick = function(event) {
       // Execute block if menu button is clicked
-      if(event.target.parentNode.id === "wildMenu" && event.target.classList.contains("button")) {
+      if(event.target.parentNode.id === "wildMenu" && event.target.classList.contains("wildButton")) {
         // Hide wild card menu
         document.getElementById("wildMenu").setAttribute("class", "hide");
         // Set wild card color equal to id of clicked button
@@ -663,35 +667,45 @@ function gameOver(winner) {
     // Append placeholder div to playerHand div
     document.getElementById("playerHand").appendChild(placeholderDiv);
     // Set player wins message
-    document.getElementById("message").innerHTML = "You won!";
-    // Set player wins image
-    document.getElementById("gameOver").children[1].setAttribute("src", "./images/playerWins.png");
+    document.getElementById("gameOverMessage").innerHTML = "You won!";
+    // Make player wins image
+    var playerWinsImg = document.createElement("img");
+    // Set source and alt text for image
+    playerWinsImg.setAttribute("src", "./images/playerWins.png");
+    playerWinsImg.setAttribute("alt", "You won!");
+    // Append image to game over div
+    document.getElementById("gameOverScreen").appendChild(playerWinsImg);
   }
   // Execute block if computer is the winner
   else {
     // Append placeholder div to computerHand div
     document.getElementById("computerHand").appendChild(placeholderDiv);
     // Set computer wins message
-    document.getElementById("message").innerHTML = "You ... did not win.";
-    // Set computer wins image
-    document.getElementById("gameOver").children[1].setAttribute("src", "./images/computerWins.png");
+    document.getElementById("gameOverMessage").innerHTML = "You ... did not win.";
+    // Make computer wins image
+    var computerWinsImg = document.createElement("img");
+    // Set source and alt text for image
+    computerWinsImg.setAttribute("src", "./images/computerWins.png");
+    computerWinsImg.setAttribute("alt", "You ... did not win.");
+    // Append image to game over div
+    document.getElementById("gameOverScreen").appendChild(computerWinsImg);
   }
   setTimeout(function() {
-    //Show gray screen overlay
+    //Show overlay screen
     document.getElementById("overlay").removeAttribute("class", "hide");
     // Show game over screen
-    document.getElementById("gameOver").removeAttribute("class", "hide");
-  }, 1000); // Pause before showing overlay
+    document.getElementById("gameOverScreen").removeAttribute("class", "hide");
+  }, 500); // Pause before showing overlay
   document.querySelector("body").addEventListener("click", function(event) {
     // Execute block if player clicks button to play again
-    if(event.target.classList.contains("play") && event.target.innerHTML === "yes") {
+    if(event.target.id === "yesButton") {
       window.location.reload();
     }
     // Execute block if player clicks button not to play again
-    else if(event.target.classList.contains("play") && event.target.innerHTML === "no") {
+    else if(event.target.id === "noButton") {
       // Hide game over screen
-      document.getElementById("gameOver").setAttribute("class", "hide");
-      // Hide gray screen overlay
+      document.getElementById("gameOverScreen").setAttribute("class", "hide");
+      // Hide overlay screen
       document.getElementById("overlay").setAttribute("class", "hide");
     }
   });
@@ -715,6 +729,22 @@ function checkDeck(deck, deckRound, discardPile) {
     // Reshuffle deck
     shuffleDeck(deck, deckRound);
   }
+}
+
+function showInfo() {
+  //Show overlay screen
+  document.getElementById("overlay").removeAttribute("class", "hide");
+  //Show info screen
+  document.getElementById("infoScreen").removeAttribute("class", "hide");
+  document.getElementById("infoScreen").onclick = function(event) {
+    // Execute block if exit button is clicked
+    if(event.target.id === "exitButton") {
+      // Hide info screen
+      document.getElementById("infoScreen").setAttribute("class", "hide");
+      // Hide overlay screen
+      document.getElementById("overlay").setAttribute("class", "hide");
+    }
+  };
 }
 
 scaleGame();

@@ -13,30 +13,45 @@
 				<div id="computerContainer">
 					<div id="computerHead">
 						<div id="computerFace" class="mute">
-							<img src="./images/computerFace2.png" alt="computer face">
+							<img src="./images/computerFace2.png" alt="computer">
 						</div>
 					</div>
 					<div id="computerHand"></div>
+					<div id="infoButton">?</div>
+					<div id="infoScreen" class="hide">
+						<div id="exitButton"></div>
+						<div id="gameMap"><img src="./images/gameMap.png" alt="game map"></div>
+						<div class="head">How the heck do I play?</div>
+						<div class="paragraph">The object of the game is to get rid of all your cards. To win, you have to do this before the computer does.</div>
+						<div class="paragraph">Play your cards by matching the card on the discard pile in number, color, or type. For example, if the card on the discard pile is a yellow 5 you can play any number 5 card, any yellow card, or a wild card.</div>
+						<div class="paragraph">If you can't match the card on the discard pile (or choose not to play a card) you must draw a card. If you draw a playable card, you can play it or choose to pass. If you don't play, you must hit pass.</div>
+						<div class="head">Special Cards</div>
+						<div class="paragraph">Skip: Skips the other player's turn. You get to play twice!</div>
+						<div class="paragraph">Draw Two: The other player has to draw two cards.</div>
+						<div class="paragraph">Wild: You choose the color of the discard pile.</div>
+						<div class="paragraph">Wild Draw Four: The other player has to draw four cards <span class="italic">and</span> you choose the color of the discard pile.</div>
+					</div>
 				</div>
 				<div id="discardPileContainer">
 					<div id="welcomeMessage" class="hide">
-						<div>It's your turn! Click on a card to play.<br>If you can't play, draw.</div>
+						<div>It's your turn! Click on a card to play.<br>If you can't play, draw.<span class="indent">for help.</span></div>
+						<div id="infoIcon">?</div>
 						<div id="triangleDown"></div>
 					</div>
 					<div id="wildMenu" class="hide">
 						<div id="triangleLeft"></div>
 						<div>choose a color</div>
-						<div class="button" id="Red"></div>
-						<div class="button" id="Green"></div>
-						<div class="button" id="Blue"></div>
-						<div class="button" id="Yellow"></div>
+						<div class="wildButton" id="Red"></div>
+						<div class="wildButton" id="Green"></div>
+						<div class="wildButton" id="Blue"></div>
+						<div class="wildButton" id="Yellow"></div>
 					</div>
-					<div id="gameOver" class="hide">
-						<div id="message"></div>
-						<img>
-						<div class="container">Play again?
-							<div class="play">yes</div>
-							<div class="play">no</div>
+					<div id="overlay" class="hide"></div>
+					<div id="gameOverScreen" class="hide">
+						<div id="gameOverMessage"></div>
+						<div id="gameOverMenu">Play again?
+							<div id="yesButton">yes</div>
+							<div id="noButton">no</div>
 						</div>
 					</div>
 					<div id="discardPile"></div>
@@ -44,16 +59,15 @@
 				<div id="playerContainer">
 					<div id="playerHead">
 						<div id="playerFace">
-							<img src="./images/playerFace3.png" alt="player face">
+							<img src="./images/playerFace3.png" alt="player">
 						</div>
 					</div>
-						<!--<div id="sidebar">
-							<div id="drawButton">draw</div>
-							<div id="passButton" class="disabled">pass</div>
-						</div>-->
+					<div id="sidebar">
+						<div id="drawButton">draw</div>
+						<div id="passButton" class="disabled">pass</div>
+					</div>
 					<div id="playerHand"></div>
 				</div>
-				<div id="overlay" class="hide"></div>
 			</div>
 		</div>
 	</body>
