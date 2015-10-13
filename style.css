@@ -10,8 +10,10 @@
        url("./fonts/montserrat-light-webfont.woff") format("woff");
 }
 
-* {
-  border: 0px dashed blue;
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("./fonts/montserrat-regular-webfont.woff2") format("woff2"),
+       url("./fonts/montserrat-regular-webfont.woff") format("woff");
 }
 
 /* Global */
@@ -91,7 +93,7 @@ img {
   left: 85.7%;
   border-radius: 50%;
   color: #9098A2;
-  font-family: "Montserrat-Light";
+  font-family: "Montserrat-Regular";
   font-size: 93%;
   text-align: center;
   line-height: 142%;
@@ -103,8 +105,8 @@ img {
 }
 
 #infoButton:hover {
-  color: #FFFFFF;
   background-color: #005780;
+  color: #FFFFFF;
 }
 
 #infoButton:active {
@@ -113,66 +115,203 @@ img {
 
 #infoScreen {
   width: 55%;
-  height: 60%;
-  top: 20%;
-  left: 25%;
+  height: 52%;
+  top: 15%;
+  left: 20%;
   z-index: 1001;
-  padding-top: 2%;
-  padding-right: 2%;
-  padding-left: 2%;
+  padding-top: 2.5%;
+  padding-right: 2.5%;
+  padding-bottom: 4%;
+  padding-left: 2.5%;
   border-radius: 0.5em;
   background-color: #FFFFFF;
-  color: #818E99;
+  color: #757575;
   font-family: "Montserrat-Light";
+  font-size: 43%;
   position: absolute;
-  overflow: scroll;
-}
-
-#exitButton {
-  top: 2.5%;
-  z-index: 1;
-  left: 97%;
-  font-size: 40%;
-  color: #9098A2;
-  position: absolute;
-  cursor: pointer;
-}
-
-#exitButton:after {
-  content: "X";
 }
 
 #infoScreen.hide {
   visibility: hidden;
 }
 
-#gameMap {
-  padding-top: 2.5%;
-  float: right;
-  padding-left: 3%;
-}
-.head {
-  padding-top: 4%;
-  font-size: 43%;
-}
-/*
-#infoScreen div:nth-child(2) {
-  margin-top: -2.2%;
-  color: #00A6F2;
+#exitButton {
+  top: -0.2%;
+  left: 96.7%;
+  color: #9098A2;
+  font-family: "Montserrat-Light";
+  font-size: 250%;
+  cursor: pointer;
+  position: absolute;
 }
 
-#infoScreen div:nth-child(6) {
-  color: #00A6F2;
+#exitButton:hover {
+  color: #005780;
 }
-*/
-.paragraph {
-  padding-top: 1.8%;
-  font-size: 35%;
-  line-height: 180%;
+
+#infoContainer {
+  width: 95%;
+  height: 99.4%;
+  padding-top: 3%;
+  padding-right: 2.5%;
+  padding-left: 2.5%;
+  background-color: #EEEEEE;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+}
+
+#gameMap {
+  width: 56.6%;
+  padding-left: 3.7%;
+  float: right;
+}
+
+#rulesContainer {
+  width: 37.7%;
+  height: 83%;
+  padding-left: 2%;
+}
+
+#rulesContainer .head {
+  padding-top: 3%;
+  color: #00B0FF;
+  text-align: center;
+}
+
+#rulesContainer .paragraph {
+  padding-top: 3.8%;
+  font-size: 85%;
+  line-height: 160%;
+}
+
+#gameTips {
+  width: 37.88%;
+  padding-right: 4.5%;
+  padding-bottom: 5%;
+  padding-left: 1.5%;
+  background-color: #EEEEEE;
+  float: left;
+}
+
+#specialCardsContainer {
+  width: 99%;
+  background-color: #FAFAFA;
+}
+
+#specialCardsContainer .head {
+  color: #00E676;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 46.8%;
+}
+
+.paragraphHead {
+  font-size: 113%;
+  font-weight: bold;
+}
+
+#specialCardsContainer .paragraph {
+  padding-bottom: 2.5%;
+  font-size: 85%;
+  line-height: 160%;
+}
+
+#specialCardsContainer div:nth-child(2) {
+  width: 25.07%;
+  padding-left: 2.5%;
+  vertical-align: top;
+  display: inline-block;
+}
+
+#specialCardsContainer div:nth-child(3) {
+  width: 25.07%;
+  padding-right: 2.5%;
+  display: inline-block;
+}
+
+#specialCardsContainer div:nth-child(4) {
+  width: 25.07%;
+  padding-left: 2.5%;
+  vertical-align: top;
+  display: inline-block;
+}
+
+#specialCardsContainer div:nth-child(5) {
+  width: 25.07%;
+  padding-right: 2.5%;
+  display: inline-block;
 }
 
 .italic {
   font-style: italic;
+}
+
+#JUNOvsUNO {
+  width: 44%;
+  padding-right: 3%;
+  padding-bottom: 2.5%;
+  padding-left: 2.5%;
+  background-color: #FFFFFF;
+  clear: both;
+  float: left;
+  display: inline-block;
+}
+
+#JUNOvsUNO .head {
+  padding-top: 5%;
+  color: #FF1744;
+}
+
+#JUNOvsUNO .paragraph {
+  padding-top: 2%;
+  font-size: 85%;
+  line-height: 160%;
+}
+
+#about {
+  width: 42%;
+  padding-right: 3%;
+  padding-left: 2.5%;
+  margin-left: 2%;
+  float: left;
+  display: inline-block;
+}
+
+#about .head {
+  padding-top: 5%;
+  color: #F2DE00;
+}
+
+#about .paragraph {
+  padding-top: 2%;
+  font-size: 85%;
+  line-height: 160%;
+}
+
+#about div:nth-child(3) {
+  padding-top: 4%;
+}
+
+a:link {
+  color: #757575;
+}
+
+a:hover {
+  color: #757575;
+}
+
+a:active {
+  color: #757575;
+}
+
+a:visited {
+  color: #757575;
+}
+
+#infoContainer > div:last-of-type {
+  padding-bottom: 3%;
+  clear: both;
 }
 
 /* Discard section */
@@ -221,27 +360,6 @@ img {
 #welcomeMessage div:first-child {
   padding-top: 3.3%;
   color: #FFFFFF;
-  display: inline-block;
-}
-
-.indent {
-  text-indent: 14%;
-  display: inline-block;
-}
-
-#infoIcon {
-  width: 7%;
-  height: 32%;
-  top: 51%;
-  left: 61.5%;
-  border-radius: 50%;
-  background-color: #008BCC;
-  color: #FFFFFF;
-  font-family: "Montserrat-Light";
-  font-size: 104%;
-  text-align: center;
-  line-height: 136%;
-  position: absolute;
   display: inline-block;
 }
 
@@ -537,6 +655,7 @@ img {
 
 #computerHand .cardText {
   color: #FFFFFF;
+  opacity: 0.7;
 }
 
 #discardPile .card {
@@ -694,8 +813,8 @@ img {
 }
 
 #sidebar > div:hover {
-  color: #FFFFFF;
   background-color: #005780;
+  color: #FFFFFF;
   cursor: pointer;
 }
 
@@ -796,8 +915,8 @@ img {
 }
 
 #gameOverMenu div:hover {
-  color: #FFFFFF;
   background-color: #005780;
+  color: #FFFFFF;
 }
 
 #gameOverMenu div:active {

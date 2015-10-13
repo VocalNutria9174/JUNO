@@ -19,28 +19,49 @@
 					<div id="computerHand"></div>
 					<div id="infoButton">?</div>
 					<div id="infoScreen" class="hide">
-						<div id="exitButton"></div>
-						<div id="gameMap"><img src="./images/gameMap.png" alt="game map"></div>
-						<div class="head">How the heck do I play?</div>
-						<div class="paragraph">The object of the game is to get rid of all your cards. To win, you have to do this before the computer does.</div>
-						<div class="paragraph">Play your cards by matching the card on the discard pile in number, color, or type. For example, if the card on the discard pile is a yellow 5 you can play any number 5 card, any yellow card, or a wild card.</div>
-						<div class="paragraph">If you can't match the card on the discard pile (or choose not to play a card) you must draw a card. If you draw a playable card, you can play it or choose to pass. If you don't play, you must hit pass.</div>
-						<div class="head">Special Cards</div>
-						<div class="paragraph">Skip: Skips the other player's turn. You get to play twice!</div>
-						<div class="paragraph">Draw Two: The other player has to draw two cards.</div>
-						<div class="paragraph">Wild: You choose the color of the discard pile.</div>
-						<div class="paragraph">Wild Draw Four: The other player has to draw four cards <span class="italic">and</span> you choose the color of the discard pile.</div>
+						<div id="exitButton">&times;</div>
+						<div id="infoContainer">
+							<div id="gameMap"><img src="./images/gameMap.png" alt="game map"></div>
+							<div id="rulesContainer">
+								<div class="head">How the heck do I play?</div>
+								<div class="paragraph">The object of the game is to get rid of all your cards. To win, you have to do this before the computer does!</div>
+								<div class="paragraph">Play your cards by matching the card on the discard pile in number, color, or type. For example, if the card on the discard pile is a yellow 5 you can play any number 5 card, any yellow card, or a wild card.</div>
+								<div class="paragraph">If you can't match the card on the discard pile (or choose not to play a card) you must draw a card. If you draw a playable card, you can choose to play or pass. If you don't play, you must pass.</div>
+							</div>
+								<div id="gameTips"><img src="./images/gameTips.png" alt="game tips"></div>
+								<div id="specialCardsContainer">
+									<div class="head">Special Cards</div>
+									<div class="paragraph"><span class="paragraphHead">Skip</span><br>Skip the other player's turn.<br>You get to play twice!</div>
+									<div class="paragraph"><span class="paragraphHead">Draw Two</span><br>The other player has to draw two cards.</div>
+									<div class="paragraph"><span class="paragraphHead">Wild</span><br>You choose the color of the discard pile.</div>
+									<div class="paragraph"><span class="paragraphHead">Wild Draw Four</span><br>You choose the color of the discard pile <span class="italic">and</span> the other player has to draw four cards.</div>
+							</div>
+							<div id="JUNOvsUNO">
+								<div class="head">How is this different from UNO?</div>
+								<div class="paragraph">The game is for one player only. There is no point system.</div>
+								<div class="paragraph">There are no Reverse cards.</div>
+								<div class="paragraph">Draw Two cards don’t cause the player they’re played on to lose a turn.</div>
+								<div class="paragraph">After drawing, you can play any playable card in your hand—not just the one you drew.</div>
+								<div class="paragraph">There are no restrictions on when a Wild Draw Four card can be played.</div>
+								<div class="paragraph">You don't have to yell "UNO" (but you can if you want to).</div>
+							</div>
+							<div id="about">
+								<div class="head">Why did you make this?</div>
+								<div class="paragraph">Mostly to learn JavaScript—hence the name—along with HTML/CSS. People told me that building something was the best way to learn, so after finishing the Codecademy course on JS I thought making an UNO game would be a fun challenge. I made JUNO without using jQuery or other libraries to teach myself about the working with the DOM, event handling, animation, and so on.</div>
+								<div class="paragraph">Reach me with any comments, questions, or bug reports at <a href="mailto:dougtebay@gmail.com">dougtebay@gmail.com</a>.</div>
+							</div>
+							<div></div>
+						</div>
 					</div>
 				</div>
 				<div id="discardPileContainer">
 					<div id="welcomeMessage" class="hide">
-						<div>It's your turn! Click on a card to play.<br>If you can't play, draw.<span class="indent">for help.</span></div>
-						<div id="infoIcon">?</div>
+						<div>It's your turn! Click on a card to play.<br>If you can't play, draw.</div>
 						<div id="triangleDown"></div>
 					</div>
-					<div id="wildMenu" class="hide">
+					<div id="wildMenu">
 						<div id="triangleLeft"></div>
-						<div>choose a color</div>
+						<div>Choose a color</div>
 						<div class="wildButton" id="Red"></div>
 						<div class="wildButton" id="Green"></div>
 						<div class="wildButton" id="Blue"></div>
