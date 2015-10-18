@@ -597,7 +597,7 @@ function playWild(whoPlayed, computerHand, playerHand, discardPile, deck, deckRo
     var handColors = {};
     // Create hash of the colors and number of cards of each color in computer's hand
     computerHand.forEach(function(i) {
-      handColors[i.color] = (handColors[i.color] || 0 ) + 1;
+      handColors[i.color] = (handColors[i.color] || 0) + 1;
     });
     var colorsSorted = [];
     // Sort colors of cards in computer's hand from greatest to least
